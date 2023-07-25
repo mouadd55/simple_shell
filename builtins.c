@@ -1,5 +1,57 @@
 #include "simpleshell.h"
 
+char	*ft_getenv(t_env *env, char *key)
+{
+	while (env)
+	{
+		if (!ft_strcmp(env->key, key))
+			return (env->value);
+		env = env->link;
+	}
+	return (NULL);
+}
+
+void	ft_setenv(t_env **envr, char *key, char *value)
+{
+	t_env	*env;
+
+	env = *envr;
+	while (env)
+	{
+		if (!ft_strcmp(env->key, key))
+		{
+			free(env->value);
+			env->value = ft_strdup(value);
+			break ;
+		}
+		env = env->link;
+	}
+	free(value);
+	return ;
+}
+
+void	pwd(t_cmd *f_list, t_env *env)
+{
+	char	*pwd;
+	int		i;
+
+	i = 0;
+	pwd = strlower(f_list->cmd[0]);
+	if (!ft_strcmp("pwd", pwd))
+	{
+		free(pwd);
+		pwd = getcwd(NULL, 0);
+		if (!pwd)
+		{
+			pwd = ft_getenv(env, "PWD");
+			i = 1;
+		}
+		ft_printf("%s\n", f_list->fd_out, pwd);
+	}
+	if (!i)
+		free(pwd);
+}
+
 void	change_dir_2(t_env **envr, t_vars *v)
 {
 	if (v->tmp_str && !chdir(v->tmp_str))
@@ -71,29 +123,14 @@ void	change_dir(t_env **envr, t_cmd *f_list)
 	free(v.val);
 }
 
-void	check_cmd(t_list **list, t_env **envr, t_cmd *f_list)
+void	check_cmd(t_env **envr, t_cmd *f_list)
 {
-	t_env	*env_copy;
-
 	if (f_list && !ft_strcmp(f_list->cmd[0], "cd"))
 		change_dir(envr, f_list);
-	else if (*list && !(*list)->prev && (*list)->link
-		&& (*list)->link->type[0] == 's' && !strcmp("unset",
-			(*list)->content))
-		unset(list, envr);
-	if (!ft_strcmp(f_list->cmd[0], "export") && f_list->cmd[1] == 0)
-	{
-		env_copy = ft_copy_env_list(*envr);
-		sort_env(env_copy, f_list->fd_out);
-		ft_destroy_list_env(&env_copy);
-	}
-	if (export_parsing(list, envr, 0))
-		return ;
 	if (f_list->cmd && f_list->cmd[0] && !ft_strcmp(f_list->cmd[0], "exit"))
 		ft_exit(f_list->cmd, f_list);
 	else if (lstsize_cmd(f_list) == 1 && f_list->cmd && f_list->cmd[0]
 		&& !ft_strcmp(f_list->cmd[0], "env"))
 		env_parsing(f_list->cmd, *envr, f_list->fd_out);
 	pwd(f_list, *envr);
-	echo(f_list);
 }

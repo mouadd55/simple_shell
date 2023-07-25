@@ -12,7 +12,6 @@ t_cmd	*lstnew_final(char **command, int fd_in, int fd_out)
 	head->fd_out = fd_out;
 	head->link = NULL;
 	head->prev = NULL;
-	head->file_name = NULL;
 	return (head);
 }
 
@@ -72,11 +71,6 @@ void	*ft_destroy_final(t_cmd **head)
 			close((*head)->fd_in);
 		if ((*head)->fd_out >= 3)
 			close((*head)->fd_out);
-		if ((*head)->file_name)
-		{
-			unlink((*head)->file_name);
-			free((*head)->file_name);
-		}
 		free(*head);
 		(*head) = tmp;
 	}

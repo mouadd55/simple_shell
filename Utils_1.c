@@ -44,3 +44,14 @@ char	*strlower(char *str)
 	}
 	return (tmp);
 }
+
+void	split_string(t_vars *v, t_cmd *final_list, t_env **envr, int size)
+{
+	v->tmp1 = ft_split_input(v->str);
+	lexer(&v->tmp1);
+	if (size == 1)
+		check_cmd(envr, final_list);
+	ft_destroy_list(&v->tmp1);
+	free(v->str);
+	v->str = NULL;
+}

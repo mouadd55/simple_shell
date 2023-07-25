@@ -27,7 +27,7 @@ void	recreate_list(t_cmd *final_list, t_env **envr)
 	spaces_in_quotes(&final_list);
 }
 
-void	minihell(t_env **envr, t_list **lst)
+void	calling_function(t_env **envr, t_list **lst)
 {
 	t_cmd	*final_list;
 
@@ -40,14 +40,9 @@ void	minihell(t_env **envr, t_list **lst)
 	final_list = NULL;
 	if (lst)
 	{
-		expand_var(lst, *envr, 1);
 		create_final_list(*lst, &final_list);
-		open_files(*lst, final_list, envr);
 		if (g_exit_status != -1)
-		{
-			recreate_list(final_list, envr);
 			execution(final_list, envr, lst);
-		}
 		else
 			g_exit_status = 1;
 	}
@@ -81,10 +76,11 @@ void	everything_starts_here(t_env *envr)
 	ssize_t num_chars_read = 0;
 
 	lst = NULL;
-	input = NULL;
 	signal(SIGINT, &catching_signals);
 	while (1)
 	{
+	    input = NULL;
+        printf("Shell: ");
 		num_chars_read = getline(&input, &buffer_size, stdin);
 		if (num_chars_read < 0)
 			break;
@@ -96,9 +92,8 @@ void	everything_starts_here(t_env *envr)
 		{
 			lst = ft_split_input(input);
 			if (lst)
-				minihell(&envr, &lst);
+				calling_function(&envr, &lst);
 		}
-		// ft_destroy_list(&lst);
 		free(input);
 	}
 }

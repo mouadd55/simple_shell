@@ -42,20 +42,3 @@ char	is_special(char c)
 		return (c);
 	return (0);
 }
-
-char	*is_redir(t_list *list)
-{
-	if (!ft_strcmp(list->type, "APPEND") || !ft_strcmp(list->type, "OUTFILE")
-		|| !ft_strcmp(list->type, "INFILE"))
-		return (list->content);
-	return (0);
-}
-
-void	sig_hand(int sig)
-{
-	if (sig == SIGINT)
-	{
-		g_exit_status = -1;
-		ioctl(STDIN_FILENO, TIOCSTI, "\n");
-	}
-}

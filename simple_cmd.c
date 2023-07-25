@@ -1,5 +1,34 @@
 #include "simpleshell.h"
 
+void	get_command(t_vars *v, t_env **env, char **env_arr)
+{
+	v->command = get_paths(v->final_list->cmd[0], *env);
+	if (!v->command)
+	{
+		ft_free_arr(env_arr);
+		ft_printf("Shell: : %s: No such file or directory\n",
+			2, v->final_list->cmd[0]);
+		exit(127);
+	}
+}
+
+void	send_command_to_execve(t_vars *v, t_env **env, char **env_arr)
+{
+	if (check_if_builtin(v->final_list))
+	{
+		ft_builtins(*env, v->final_list);
+		exit (g_exit_status);
+	}
+	else if (execve(v->command, v->final_list->cmd, env_arr) == -1)
+	{
+		ft_printf("Shell: : %s: not found\n", 2,
+			v->final_list->cmd[0]);
+		free(v->command);
+		ft_free_arr(env_arr);
+		exit(127);
+	}
+}
+
 char	*get_path_value(t_env *env)
 {
 	while (env)
@@ -73,22 +102,10 @@ void	dup_file_descriptors(char *command, t_cmd *f_list, char **env_arr)
 {
 	if (f_list->fd_out != -1 && f_list->fd_in != -1)
 	{	
-		if (f_list->fd_out != STDOUT_FILENO)
-		{
-			dup2(f_list->fd_out, STDOUT_FILENO);
-			close(f_list->fd_out);
-		}
-		if (f_list->fd_in != STDIN_FILENO)
-		{
-			if (f_list->file_name && f_list->fd_in == -2)
-				f_list->fd_in = open(f_list->file_name, O_RDONLY);
-			dup2(f_list->fd_in, STDIN_FILENO);
-			close(f_list->fd_in);
-		}
 		g_exit_status = 0;
 		if (execve(command, f_list->cmd, env_arr) == -1)
 		{
-			ft_printf("Shell: : %s: command not found\n", 2, f_list->cmd[0]);
+			ft_printf("Shell: : %s: not found\n", 2, f_list->cmd[0]);
 			free(command);
 			ft_free_arr(env_arr);
 			exit(127);
