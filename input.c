@@ -1,5 +1,12 @@
 #include "simpleshell.h"
 
+/**
+ * handle_redirect - Handles redirection symbols '>>' and '<<'
+ * in the input string and adds
+ *                   them to the linked list of commands accordingly.
+ * @lst: A pointer to a pointer to the head of the linked list of commands.
+ * @v: A pointer to the t_vars struct containing temporary variables.
+ */
 void	handle_redirect(t_list **lst, t_vars *v)
 {
 	if ((v->arr[v->i][v->j] == '>' && v->arr[v->i][v->j + 1] == '>')
@@ -15,6 +22,15 @@ void	handle_redirect(t_list **lst, t_vars *v)
 	}
 }
 
+/**
+ * handle_quotes - Handles quotes (single and double)
+ * in the input string and adds the quoted
+ *                 substrings to the linked list of commands accordingly.
+ * @v: A pointer to the t_vars struct containing temporary variables.
+ * @lst: A pointer to a pointer to the head of the linked list of commands.
+ * Return: nothing
+ * @c: The quote character (single or double).
+ */
 void	handle_quotes(t_vars *v, t_list **lst, char c)
 {
 	if (v->arr[v->i][v->j] && !is_special(v->arr[v->i][v->j]))
@@ -44,6 +60,13 @@ void	handle_quotes(t_vars *v, t_list **lst, char c)
 		handle_redirect(lst, v);
 }
 
+/**
+ * split_input - Splits the input string into individual command tokens and
+ *               handles redirection and quotes in the input.
+ * @lst: A pointer to a pointer to the head of the linked list of commands.
+ * @v: A pointer to the t_vars struct containing temporary variables.
+ * Return: nothing
+ */
 static void	split_input(t_list **lst, t_vars *v)
 {
 	if (v->arr[v->i] && (check_char(v->arr[v->i], '\"')
@@ -71,6 +94,12 @@ static void	split_input(t_list **lst, t_vars *v)
 	}
 }
 
+/**
+ * _split_input - Splits the input string into individual command tokens and
+ *               handles redirection and quotes in the input.
+ * @input: The input string to be split.
+ * Return: A pointer to the head of the linked list of commands.
+ */
 t_list	*_split_input(char *input)
 {
 	t_list	*lst;
