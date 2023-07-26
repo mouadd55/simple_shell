@@ -1,5 +1,12 @@
 #include "simpleshell.h"
 
+/**
+ * sign_case2 - Helper function for handling exit command cases
+ * with specific conditions.
+ *              Checks if the command has special cases for exit.
+ * @cmd: An array of strings containing the command and its arguments.
+ * Return: 1 if the command has a special case, 0 otherwise.
+ */
 int	sign_case2(char **cmd)
 {
 	if (!_strcmp(cmd[1], "-0") && cmd[2] == 0)
@@ -16,6 +23,14 @@ int	sign_case2(char **cmd)
 	return (0);
 }
 
+/**
+ * sign_case - Handles the exit command cases with a sign (+ or -).
+ *             Checks if the argument has a sign and validates
+ *             the numeric argument.
+ * @v: A pointer to the t_vars struct containing temporary variables.
+ * @cmd: An array of strings containing the command and its arguments.
+ * Return: 1 if there is an error with the exit command, 0 otherwise.
+ */
 int	sign_case(t_vars *v, char **cmd)
 {
 	if (sign_case2(cmd))
@@ -43,6 +58,13 @@ int	sign_case(t_vars *v, char **cmd)
 	return (0);
 }
 
+/**
+ * check_if_digit - Checks if the given argument is
+ * a valid numeric argument for the exit command.
+ * @v: A pointer to the t_vars struct containing temporary variables.
+ * @cmd: An array of strings containing the command and its arguments.
+ * Return: 1 if the argument is not a valid numeric argument, 0 otherwise.
+ */
 int	check_if_digit(t_vars *v, char **cmd)
 {
 	if (_isdigit(cmd[v->i]))
@@ -68,6 +90,13 @@ int	check_if_digit(t_vars *v, char **cmd)
 	return (0);
 }
 
+/**
+ * exit_errors - Handles errors for the exit command.
+ *        Checks if the arguments provided to the exit command are valid.
+ * @v: A pointer to the t_vars struct containing temporary variables.
+ * @cmd: An array of strings containing the command and its arguments.
+ * Return: 1 if there is an error with the exit command, 0 otherwise.
+ */
 int	exit_errors(t_vars *v, char **cmd)
 {
 	if (check_if_digit(v, cmd))
@@ -97,6 +126,13 @@ int	exit_errors(t_vars *v, char **cmd)
 	return (0);
 }
 
+/**
+ * ft_exit - Executes the exit command, terminating the shell.
+ *           Checks if the arguments provided to the exit command are valid.
+ * @cmd: An array of strings containing the command and its arguments.
+ * @final: A pointer to the head of the final list of commands
+ * (used to check if it is the last command).
+ */
 void	ft_exit(char **cmd, t_cmd *final)
 {
 	t_vars	v;
@@ -112,7 +148,7 @@ void	ft_exit(char **cmd, t_cmd *final)
 			exit(255);
 		}
 		if (exit_errors(&v, cmd))
-			return ;
+			return;
 	}
 	if (final && !final->link && !final->prev && v.j == 0)
 	{

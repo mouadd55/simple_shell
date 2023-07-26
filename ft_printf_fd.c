@@ -17,7 +17,7 @@ int	printc(char c, int fd)
  * prints - Write a null-terminated string to a file descriptor.
  * @s: The string to be written.
  * @fd: The file descriptor where the string will be written.
- * Return: The number of characters written on successful write, or -1 on error.
+ * Return: The number of characters written on successful write.
  */
 int	prints(char *s, int fd)
 {
@@ -54,11 +54,14 @@ int	_specifier(va_list args, char specifier, int fd)
 }
 
 /**
- * _printf - Custom implementation of printf that writes formatted output to a file descriptor.
+ * _printf - Custom implementation of printf that
+ * writes formatted output to a file descriptor.
  * @first: The format string containing the text and format specifiers.
  * @fd: The file descriptor where the output will be written.
- * @...: Variable arguments corresponding to the format specifiers in the format string.
- * Return: The total number of characters printed to the file descriptor, or -1 on error.
+ * @...: Variable arguments corresponding
+ * to the format specifiers in the format string.
+ * Return: The total number of characters printed to the
+ * file descriptor, or -1 on error.
  */
 int	_printf(const char *first, int fd, ...)
 {

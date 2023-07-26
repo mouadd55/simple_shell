@@ -46,6 +46,6 @@ void	lexer(t_list **list)
 		tmp->type = _strdup("SINGLE_Q");
 	else
 		tmp->type = _strdup("COMMAND");
-		tmp = tmp->link;
+	tmp = tmp->link;
 	}
 }
