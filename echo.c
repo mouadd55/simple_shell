@@ -1,23 +1,6 @@
 #include "simpleshell.h"
 
 /**
- * _getenv - Get the value of an environment variable.
- * @env: A pointer to the environment list.
- * @key: The key of the environment variable to retrieve.
- * Return: The value of the environment variable if found, otherwise NULL.
- */
-char	*_getenv(t_env *env, char *key)
-{
-	while (env)
-	{
-		if (!_strcmp(env->key, key))
-			return (env->value);
-		env = env->link;
-	}
-	return (NULL);
-}
-
-/**
  * _setenv - Set the value of an environment variable.
  * @envr: A double pointer to the environment list.
  * @key: The key of the environment variable to set.
