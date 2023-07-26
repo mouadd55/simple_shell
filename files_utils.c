@@ -86,22 +86,3 @@ int	is_space(int c)
 		return (1);
 	return (0);
 }
-
-/**
- * split_string - Splits the input string into commands
- * and processes each command.
- * @v: A pointer to the t_vars struct containing temporary variables.
- * @final_list: A pointer to the head of the final list of commands.
- * @envr: A pointer to a pointer to the head of the environment variables list.
- * @size: An integer flag indicating the number of commands in the final list.
- */
-void	split_string(t_vars *v, t_cmd *final_list, t_env **envr, int size)
-{
-	v->tmp1 = _split_input(v->str);
-	lexer(&v->tmp1);
-	if (size == 1)
-		check_cmd(envr, final_list);
-	_destroy_list(&v->tmp1);
-	free(v->str);
-	v->str = NULL;
-}

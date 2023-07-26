@@ -1,5 +1,11 @@
 #include "simpleshell.h"
 
+/**
+ * _getenv - Get the value of an environment variable.
+ * @env: A pointer to the environment list.
+ * @key: The key of the environment variable to retrieve.
+ * Return: The value of the environment variable if found, otherwise NULL.
+ */
 char	*_getenv(t_env *env, char *key)
 {
 	while (env)
@@ -11,6 +17,12 @@ char	*_getenv(t_env *env, char *key)
 	return (NULL);
 }
 
+/**
+ * _setenv - Set the value of an environment variable.
+ * @envr: A double pointer to the environment list.
+ * @key: The key of the environment variable to set.
+ * @value: The value to set for the environment variable.
+ */
 void	_setenv(t_env **envr, char *key, char *value)
 {
 	t_env	*env;
@@ -30,6 +42,11 @@ void	_setenv(t_env **envr, char *key, char *value)
 	return ;
 }
 
+/**
+ * change_dir_2 - Change the current working directory.
+ * @envr: A double pointer to the environment list.
+ * @v: A pointer to the t_vars structure.
+ */
 void	change_dir_2(t_env **envr, t_vars *v)
 {
 	if (v->tmp_str && !chdir(v->tmp_str))
@@ -48,6 +65,14 @@ void	change_dir_2(t_env **envr, t_vars *v)
 	}
 }
 
+/**
+ * check_cd_env - Check the arguments for the 'cd'
+ * command and handle special cases.
+ * @envr: A double pointer to the environment list.
+ * @f_list: A pointer to the t_cmd structure representing the command.
+ * @v: A pointer to the t_vars structure.
+ * Return: 1 if the 'cd' command should exit early, 0 otherwise.
+ */
 int	check_cd_env(t_env **envr, t_cmd *f_list, t_vars *v)
 {
 	if (!f_list->cmd[1] || !_strcmp(f_list->cmd[1], "~"))
@@ -74,6 +99,12 @@ int	check_cd_env(t_env **envr, t_cmd *f_list, t_vars *v)
 	return (0);
 }
 
+/**
+ * change_dir - Handle the 'cd' command and change
+ * the current working directory.
+ * @envr: A double pointer to the environment list.
+ * @f_list: A pointer to the t_cmd structure representing the command.
+ */
 void	change_dir(t_env **envr, t_cmd *f_list)
 {
 	t_vars	v;
@@ -92,6 +123,11 @@ void	change_dir(t_env **envr, t_cmd *f_list)
 	free(v.val);
 }
 
+/**
+ * check_cmd - Check and handle built-in commands (cd, exit, env).
+ * @envr: A double pointer to the environment list.
+ * @f_list: A pointer to the t_cmd structure representing the command.
+ */
 void	check_cmd(t_env **envr, t_cmd *f_list)
 {
 	if (f_list && !_strcmp(f_list->cmd[0], "cd"))

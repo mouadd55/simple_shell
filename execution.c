@@ -1,7 +1,8 @@
 #include "simpleshell.h"
 
 /**
- * catching_signals - Signal handler function to catch and handle specific signals.
+ * catching_signals - Signal handler function to catch
+ * and handle specific signals.
  * @sig: The signal number received by the signal handler.
  * Description:  Signal handler function to catch and handle specific
  * signals, mainly SIGINT (Ctrl+C).
@@ -43,7 +44,8 @@ int	check_if_builtin(t_cmd *final_list)
 /**
  * execute_commands - Execute the commands in the final command list.
  * @v: A pointer to the t_vars structure containing shell variables.
- * @env: A pointer to the t_env structure representing the environment variables.
+ * @env: A pointer to the t_env structure representing
+ * the environment variables.
  * @size: The number of commands in the final list.
  * Description: Executes a list of commands using forked child processes.
  */
@@ -76,9 +78,9 @@ void	execute_commands(t_vars *v, t_env **env, int size)
 
 /**
  * execution - Execute the command(s) in the final command list.
- *
  * @final_list: A pointer to the head of the command linked list.
- * @env: A pointer to the t_env structure representing the environment variables.
+ * @env: A pointer to the t_env structure representing
+ * the environment variables.
  * @lst: A pointer to the linked list.
  * Description: Executes commands in a final command list while
  * handling signals and child processes.

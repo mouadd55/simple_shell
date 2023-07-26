@@ -2,6 +2,13 @@
 
 int	g_exit_status;
 
+/**
+ * recreate_list - Reconstructs the command list with proper
+ * formatting for execution.
+ * Handles the spaces in quotes and splits the input into separate commands.
+ * @final_list: A pointer to the head of the final list of commands.
+ * @envr: A pointer to the environment list.
+ */
 void	recreate_list(t_cmd *final_list, t_env **envr)
 {
 	t_vars	v;
@@ -27,6 +34,12 @@ void	recreate_list(t_cmd *final_list, t_env **envr)
 	spaces_in_quotes(&final_list);
 }
 
+/**
+ * calling_function - Handles the main execution of the shell commands.
+ * Performs syntax checks, tokenization, and command execution.
+ * @envr: A pointer to the environment list.
+ * @lst: A pointer to the head of the input list of commands.
+ */
 void	calling_function(t_env **envr, t_list **lst)
 {
 	t_cmd	*final_list;
@@ -52,6 +65,12 @@ void	calling_function(t_env **envr, t_list **lst)
 	_destroy_final(&final_list);
 }
 
+
+/**
+ * everything_starts_here - The main loop of the shell program.
+ * Reads input, tokenizes it, and executes the commands.
+ * @envr: A pointer to the environment list.
+ */
 void	everything_starts_here(t_env *envr)
 {
 	char	*input;
@@ -81,6 +100,13 @@ void	everything_starts_here(t_env *envr)
 	}
 }
 
+/**
+ * main - The main function that initializes and runs the shell.
+ * @ac: The number of command-line arguments.
+ * @av: An array of strings containing the command-line arguments.
+ * @env: An array of strings containing the environment variables.
+ * Return: Always 0.
+ */
 int	main(int ac, char **av, char **env)
 {
 	t_env	*envr;
