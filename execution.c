@@ -1,5 +1,25 @@
 #include "simpleshell.h"
 
+/**
+ * catching_signals - Signal handler function to catch and handle specific signals.
+ * @sig: The signal number received by the signal handler.
+ * Description:  Signal handler function to catch and handle specific
+ * signals, mainly SIGINT (Ctrl+C).
+ */
+void	catching_signals(int sig)
+{
+	if (sig == SIGINT)
+	{
+		g_exit_status = 1;
+		write(1, "\n", 1);
+	}
+}
+
+/**
+ * check_if_builtin - Check if a command is a built-in command.
+ * @final_list: A pointer to the command node.
+ * Return: 1 if the command is a built-in command, 0 otherwise.
+ */
 int	check_if_builtin(t_cmd *final_list)
 {
 	int		i;
@@ -20,6 +40,13 @@ int	check_if_builtin(t_cmd *final_list)
 	return (0);
 }
 
+/**
+ * execute_commands - Execute the commands in the final command list.
+ * @v: A pointer to the t_vars structure containing shell variables.
+ * @env: A pointer to the t_env structure representing the environment variables.
+ * @size: The number of commands in the final list.
+ * Description: Executes a list of commands using forked child processes.
+ */
 void	execute_commands(t_vars *v, t_env **env, int size)
 {
 	while (v->final_list)
@@ -47,6 +74,15 @@ void	execute_commands(t_vars *v, t_env **env, int size)
 	}
 }
 
+/**
+ * execution - Execute the command(s) in the final command list.
+ *
+ * @final_list: A pointer to the head of the command linked list.
+ * @env: A pointer to the t_env structure representing the environment variables.
+ * @lst: A pointer to the linked list.
+ * Description: Executes commands in a final command list while
+ * handling signals and child processes.
+ */
 void	execution(t_cmd *final_list, t_env **env, t_list **lst)
 {
 	t_vars	v;

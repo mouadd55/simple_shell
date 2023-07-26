@@ -1,5 +1,10 @@
 #include "simpleshell.h"
 
+/**
+ * lstnew_final - Create a new node for the t_cmd linked list.
+ * @command: The command to be stored in the new node.
+ * Return: A pointer to the newly created t_cmd node, or NULL on failure.
+ */
 t_cmd	*lstnew_final(char **command)
 {
 	t_cmd	*head;
@@ -13,6 +18,11 @@ t_cmd	*lstnew_final(char **command)
 	return (head);
 }
 
+/**
+ * lstlast_final - Find the last node of the t_cmd linked list.
+ * @head: The head of the t_cmd linked list.
+ * Return: A pointer to the last node of the linked list, or NULL if the list is empty.
+ */
 t_cmd	*lstlast_final(t_cmd *head)
 {
 	if (!head)
@@ -26,6 +36,12 @@ t_cmd	*lstlast_final(t_cmd *head)
 	return (NULL);
 }
 
+/**
+ * lstadd_back_final - Add a new node to the end of the t_cmd linked list.
+ *
+ * @head: A pointer to a pointer to the head of the t_cmd linked list.
+ * @new: The new node to be added.
+ */
 void	lstadd_back_final(t_cmd **head, t_cmd *new)
 {
 	t_cmd	*tmp;
@@ -40,6 +56,11 @@ void	lstadd_back_final(t_cmd **head, t_cmd *new)
 	}
 }
 
+/**
+ * lstsize_cmd - Calculate the number of nodes (commands) in the t_cmd linked list.
+ * @lst: The head of the t_cmd linked list.
+ * Return: The number of nodes (commands) in the linked list.
+ */
 int	lstsize_cmd(t_cmd *lst)
 {
 	int	counter;
@@ -53,6 +74,11 @@ int	lstsize_cmd(t_cmd *lst)
 	return (counter);
 }
 
+
+/**
+ * ft_destroy_final - Free the memory allocated for the t_cmd linked list and its commands.
+ * @head: A pointer to a pointer to the head of the t_cmd linked list.
+ */
 void	*ft_destroy_final(t_cmd **head)
 {
 	t_cmd	*tmp;
