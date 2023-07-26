@@ -56,13 +56,11 @@ void	env_parsing(char **cmd, t_env *env)
 			v.count++;
 		else if (v.count && cmd[v.i][0] == '-' && _strlen(cmd[v.i]) > 1)
 		{
-			g_exit_status = 1;
 			_printf("env: illegal option -- %c\n", 2, cmd[v.i][1]);
 			return;
 		}
 		else if (v.count && cmd[v.i][0] != '-')
 		{
-			g_exit_status = 127;
 			_printf("env: %s: No such file or directory\n", 2, cmd[v.i]);
 			return;
 		}

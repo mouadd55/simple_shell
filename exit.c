@@ -16,7 +16,6 @@ int	sign_case2(char **cmd)
 	}
 	else if (cmd[2] && _atoi(cmd[1]) == 0 && _atoi(cmd[2]) == 0)
 	{
-		g_exit_status = 1;
 		_printf("exit\nShell: : exit: too many arguments\n", 2);
 		return (1);
 	}
@@ -43,14 +42,12 @@ int	sign_case(t_vars *v, char **cmd)
 			_printf("exit\nShell: : exit: %s: numeric argument required\n", 2,
 				cmd[v->i]);
 			free(v->str);
-			g_exit_status = 255;
 			exit(255);
 		}
 		if (!cmd[v->i + 1])
 		{
 			_printf("exit\n", 1);
 			free(v->str);
-			g_exit_status = _atoi(cmd[v->i]);
 			exit(_atoi(cmd[v->i]));
 		}
 		free(v->str);
@@ -85,7 +82,6 @@ int	check_if_digit(t_vars *v, char **cmd)
 			v->str = NULL;
 			exit(255);
 		}
-		g_exit_status = _atoi(cmd[v->i]);
 	}
 	return (0);
 }
@@ -115,7 +111,6 @@ int	exit_errors(t_vars *v, char **cmd)
 	else if ((v->flag == 2 && v->i == 2) || (v->flag == 1 && v->i == 2))
 	{
 		v->j++;
-		g_exit_status = 1;
 		_printf("exit\nShell: : exit: too many arguments\n", 2);
 	}
 	if (v->str)

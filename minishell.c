@@ -1,7 +1,5 @@
 #include "simpleshell.h"
 
-int	g_exit_status;
-
 /**
  * recreate_list - Reconstructs the command list with proper
  * formatting for execution.
@@ -45,22 +43,14 @@ void	calling_function(t_env **envr, t_list **lst)
 	t_cmd	*final_list;
 
 	if (check_syntax(*lst))
-	{
-		g_exit_status = 258;
 		return;
-	}
 	lexer(lst);
 	final_list = NULL;
 	if (lst)
 	{
 		create_final_list(*lst, &final_list);
-		if (g_exit_status != -1)
-		{
-			recreate_list(final_list, envr);
-			execution(final_list, envr, lst);
-		}
-		else
-			g_exit_status = 1;
+		recreate_list(final_list, envr);
+		execution(final_list, envr, lst);
 	}
 	_destroy_final(&final_list);
 }

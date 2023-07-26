@@ -41,10 +41,7 @@ void	change_dir_2(t_env **envr, t_vars *v)
 		}
 	}
 	else
-	{
-		g_exit_status = 1;
 		perror(v->tmp_str);
-	}
 }
 
 /**

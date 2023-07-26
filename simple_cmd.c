@@ -106,7 +106,7 @@ void	simple_cmd(t_cmd *f_list, t_env *env, char *command
 	if (f_list->cmd && f_list->cmd[0])
 	{
 		if (check_if_builtin(f_list))
-			exit(g_exit_status);
+			exit(0);
 		command = get_paths(f_list->cmd[0], env);
 		if (!command)
 		{
@@ -115,7 +115,6 @@ void	simple_cmd(t_cmd *f_list, t_env *env, char *command
 				2, f_list->cmd[0]);
 			exit(127);
 		}
-		g_exit_status = 0;
 		if (execve(command, f_list->cmd, env_arr) == -1)
 		{
 			_printf("Shell: %s: command not found\n", 2, f_list->cmd[0]);
