@@ -18,9 +18,11 @@ char	*get_path_value(t_env *env)
 }
 
 /**
- * create_2d_array_from_env_list - Convert the t_env linked list into a 2D array.
+ * create_2d_array_from_env_list - Convert the t_env
+ * linked list into a 2D array.
  * @env: The head of the t_env linked list.
- * Return: A pointer to a dynamically allocated 2D array representing the environment variables,
+ * Return: A pointer to a dynamically allocated 2D array
+ * representing the environment variables,
  *         or NULL on failure.
  */
 char	**create_2d_array_from_env_list(t_env *env)
@@ -53,11 +55,13 @@ char	**create_2d_array_from_env_list(t_env *env)
 }
 
 /**
- * get_paths - Get the full path of the given command by searching for it in the "PATH" environment variable.
+ * get_paths - Get the full path of the given command by
+ * searching for it in the "PATH" environment variable.
  * @cmd: The command to search for in the "PATH".
  * @env: The head of the t_env linked list.
- * Return: A pointer to a dynamically allocated string containing the full path of the command,
- *         or a pointer to the original command if it was not found in the "PATH".
+ * Return: A pointer to a dynamically allocated strin
+ * containing the full path of the command,
+ * or a pointer to the original command if it was not found in the "PATH".
  */
 char	*get_paths(char *cmd, t_env *env)
 {
@@ -89,7 +93,8 @@ char	*get_paths(char *cmd, t_env *env)
 }
 
 /**
- * simple_cmd - Execute a simple command (non-built-in) with appropriate path handling.
+ * simple_cmd - Execute a simple command (non-built-in)
+ * with appropriate path handling.
  * @f_list: A pointer to the command node.
  * @env: The head of the t_env linked list.
  * @command: A pointer to the command path.
@@ -101,7 +106,7 @@ void	simple_cmd(t_cmd *f_list, t_env *env, char *command
 	if (f_list->cmd && f_list->cmd[0])
 	{
 		if (check_if_builtin(f_list))
-			exit (g_exit_status);
+			exit(g_exit_status);
 		command = get_paths(f_list->cmd[0], env);
 		if (!command)
 		{

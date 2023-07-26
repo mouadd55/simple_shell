@@ -2,7 +2,7 @@
 
 /**
  * f_strrchr - Locate the last occurrence of a character in a string.
- * @str: The string to search within.
+ * @s: The string to search within.
  * @c: The character to find.
  * Return: The index of the last occurrence of the character in the string,
  *         or 0 if the character is not found.
@@ -25,8 +25,8 @@ char	*f_strrchr(const char *s, int c)
 
 /**
  * f_strchr - Locate the first occurrence of a character in a string.
- * @str: The string to search within.
- * @find: The character to find.
+ * @s: The string to search within.
+ * @c: The character to find.
  * Return: The index of the first occurrence of the character in the string,
  *         or 0 if the character is not found.
  */
@@ -107,7 +107,8 @@ int	nbr_len(long nbr)
 /**
  * _itoa - Convert an integer to a string.
  * @n: The integer to be converted.
- * Return: A newly allocated string representation of the integer, or NULL on failure.
+ * Return: A newly allocated string representation
+ * of the integer, or NULL on failure.
  */
 char	*_itoa(long n)
 {

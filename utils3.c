@@ -2,7 +2,8 @@
 
 
 /**
- * _count_words - Count the number of words in a string, delimited by specific characters.
+ * _count_words - Count the number of words in a string, delimited
+ * by specific characters.
  * @s: The input string.
  * @c: The set of characters that delimit the words.
  * Return: The number of words in the string.
@@ -27,7 +28,8 @@ int	_count_words(char const *s, char *c)
 }
 
 /**
- * _lenword - Calculate the length of a word in a string, delimited by specific characters.
+ * _lenword - Calculate the length of a word in a string, delimited
+ * by specific characters.
  * @s: The input string.
  * @c: The set of characters that delimit the words.
  * Return: The length of the word.
@@ -54,15 +56,16 @@ char	**_free_arr(char **str)
 	i = 0;
 	while (str && str[i])
 	{
-		free (str[i]);
+		free(str[i]);
 		i++;
 	}
-	free (str);
+	free(str);
 	return (0);
 }
 
 /**
- * _split - Split a string into an array of substrings, using specified delimiters.
+ * _split - Split a string into an array of substrings, using
+ * specified delimiters.
  * @s: The input string to be split.
  * @c: The set of characters that delimit the substrings.
  * Return: A newly allocated array of strings containing the substrings,
