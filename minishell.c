@@ -47,7 +47,7 @@ void	calling_function(t_env **envr, t_list **lst)
 	if (check_syntax(*lst))
 	{
 		g_exit_status = 258;
-		return ;
+		return;
 	}
 	lexer(lst);
 	final_list = NULL;
@@ -81,15 +81,15 @@ void	everything_starts_here(t_env *envr)
 	signal(SIGINT, &catching_signals);
 	while (1)
 	{
-	    input = NULL;
-        printf("$ ");
+		input = NULL;
+		printf("$ ");
 		num_chars_read = getline(&input, &buffer_size, stdin);
 		if (num_chars_read < 0)
 			break;
 		if (input[num_chars_read - 1] == '\n')
 			input[num_chars_read - 1]  = '\0';
 		if (!input)
-			return ;
+			return;
 		if (_strlen(input))
 		{
 			lst = _split_input(input);

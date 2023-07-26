@@ -53,24 +53,24 @@ void	execute_commands(t_vars *v, t_env **env, int size)
 {
 	while (v->final_list)
 	{
-	    v->env_arr = create_2d_array_from_env_list(*env);
-	    v->child = fork();
-	    if (v->child < 0)
-	    {
-	    	_free_arr(v->env_arr);
-	    	perror("Shell: : fork");
-	    	return ;
-	    }
-	    v->command = NULL;
+		v->env_arr = create_2d_array_from_env_list(*env);
+		v->child = fork();
+		if (v->child < 0)
+		{
+			_free_arr(v->env_arr);
+			perror("Shell: : fork");
+			return;
+		}
+		v->command = NULL;
 		if (v->child == 0)
 		{
-        	signal(SIGINT, SIG_DFL);
-	        signal(SIGQUIT, SIG_DFL);
-	        if (v->final_list->cmd && !v->final_list->cmd[0])
-	        	exit(0);
-	        if (size == 1)
-	        	simple_cmd(v->final_list, *env, v->command, v->env_arr);
-        }
+			signal(SIGINT, SIG_DFL);
+			signal(SIGQUIT, SIG_DFL);
+		if (v->final_list->cmd && !v->final_list->cmd[0])
+			exit(0);
+		if (size == 1)
+			simple_cmd(v->final_list, *env, v->command, v->env_arr);
+	}
 		_free_arr(v->env_arr);
 		v->final_list = v->final_list->link;
 	}
@@ -88,7 +88,7 @@ void	execute_commands(t_vars *v, t_env **env, int size)
 void	execution(t_cmd *final_list, t_env **env, t_list **lst)
 {
 	t_vars	v;
-    int	wait_return;
+	int	wait_return;
 
 	v.lst = *lst;
 	v.final_list = final_list;

@@ -35,7 +35,7 @@ void	print_env(int i, int count, t_env *env)
 				_printf("%s=%s\n", 1, env->key, env->value);
 			env = env->link;
 		}
-	}	
+	}
 }
 
 /**
@@ -58,13 +58,13 @@ void	env_parsing(char **cmd, t_env *env)
 		{
 			g_exit_status = 1;
 			_printf("env: illegal option -- %c\n", 2, cmd[v.i][1]);
-			return ;
+			return;
 		}
 		else if (v.count && cmd[v.i][0] != '-')
 		{
 			g_exit_status = 127;
 			_printf("env: %s: No such file or directory\n", 2, cmd[v.i]);
-			return ;
+			return;
 		}
 	}
 	print_env(v.i, v.count, env);

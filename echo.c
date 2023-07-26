@@ -17,12 +17,11 @@ void	_setenv(t_env **envr, char *key, char *value)
 		{
 			free(env->value);
 			env->value = _strdup(value);
-			break ;
+			break;
 		}
 		env = env->link;
 	}
 	free(value);
-	return ;
 }
 
 /**
@@ -95,11 +94,11 @@ void	change_dir(t_env **envr, t_cmd *f_list)
 	v.tmp_str = NULL;
 	if (!f_list->cmd[1] && !_getenv(*envr, "HOME"))
 	{
-		_printf("Shell: : cd: HOME not set\n", 2);
-		return ;
+		_printf("Shell: cd: HOME not set\n", 2);
+		return;
 	}
 	else if (check_cd_env(envr, f_list, &v))
-		return ;
+		return;
 	v.val = getcwd(NULL, 0);
 	change_dir_2(envr, &v);
 	free(v.tmp_str);
