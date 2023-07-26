@@ -20,26 +20,19 @@ int	check_if_builtin(t_cmd *final_list)
 	return (0);
 }
 
-int	fork_protection(t_vars *v, t_env **env)
-{
-	v->env_arr = create_2d_array_from_env_list(*env);
-	v->child = fork();
-	if (v->child < 0)
-	{
-		ft_free_arr(v->env_arr);
-		perror("Shell: : fork");
-		return (1);
-	}
-	v->command = NULL;
-	return (0);
-}
-
 void	execute_commands(t_vars *v, t_env **env, int size)
 {
 	while (v->final_list)
 	{
-		if (fork_protection(v, env))
-			return ;
+	    v->env_arr = create_2d_array_from_env_list(*env);
+	    v->child = fork();
+	    if (v->child < 0)
+	    {
+	    	ft_free_arr(v->env_arr);
+	    	perror("Shell: : fork");
+	    	return ;
+	    }
+	    v->command = NULL;
 		if (v->child == 0)
 		{
         	signal(SIGINT, SIG_DFL);
@@ -66,6 +59,7 @@ void	execute_commands(t_vars *v, t_env **env, int size)
 void	execution(t_cmd *final_list, t_env **env, t_list **lst)
 {
 	t_vars	v;
+    int	wait_return;
 
 	v.lst = *lst;
 	v.final_list = final_list;
@@ -74,6 +68,8 @@ void	execution(t_cmd *final_list, t_env **env, t_list **lst)
 	if (final_list->cmd)
 		execute_commands(&v, env, v.count);
 	ft_destroy_list(lst);
-	exit_by_signal();
+	wait_return = 0;
+	while (wait_return != -1)
+		wait_return = wait(NULL);
 	signal(SIGINT, &catching_signals);
 }

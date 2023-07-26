@@ -36,10 +36,7 @@ typedef struct s_env
 typedef struct s_cmd
 {
 	int				flag;
-	// int				fd_in;
-	// int				fd_out;
 	char			**cmd;
-	// char			*file_name;
 	struct s_cmd	*link;
 	struct s_cmd	*prev;
 }					t_cmd;
@@ -47,20 +44,16 @@ typedef struct s_cmd
 typedef struct s_vars
 {
 	int				i;
-	int				fd;
 	int				j;
 	int				end;
 	int				flag;
-	int				vars;
 	int				start;
 	int				count;
 	int				d_quotes;
-	int				pipefd[2];
 	pid_t			child;
 	char			*tmp;
 	char			*tmp_str;
 	char			*str;
-	char			*var;
 	char			*val;
 	char			**arr;
 	char			*tmp_key;
@@ -69,11 +62,7 @@ typedef struct s_vars
 	char			**env_arr;
 	t_list			*lst;
 	t_list			*tmp1;
-	t_list			*tmp2;
-	t_list			*tmp3;
 	t_env			*temp1;
-	t_env			*temp2;
-	t_env			*temp3;
 	t_cmd			*final_list;
 }					t_vars;
 
@@ -130,11 +119,8 @@ void				split_string(t_vars *v, t_cmd *flst, t_env **env, int size);
 /**************************** Builtins functions *****************************/
 
 char				*ft_getenv(t_env *env, char *key);
-char				*is_redir(t_list *list);
 void				catching_signals(int sig);
 t_cmd				*lstlast_final(t_cmd *head);
-t_env				*ft_copy_env_list(t_env *env);
-void				initialize_variables(t_vars *v);
 void				*ft_destroy_final(t_cmd **head);
 void				switch_space(char *input, int x);
 t_env				*ft_split_environment(char **env);
@@ -151,18 +137,16 @@ t_cmd				*lstnew_final(char **command);
 void				check_cmd(t_env **envr, t_cmd *f_list);
 void				first_conditions(t_list *tmp);
 int					search_for_pipe(t_vars *v);
-void				sig_hand(int sig);
 void				ft_setenv(t_env **envr, char *key, char *value);
 /**************************** Execution Part *****************************/
 
-void				exit_by_signal(void);
 int					lstsize_cmd(t_cmd *lst);
 char				*get_path_value(t_env *env);
 char				*get_paths(char *cmd, t_env *env);
 char				*get_paths(char *cmd, t_env *env);
 int					check_if_builtin(t_cmd *final_list);
+void				ft_builtins(t_env *env, t_cmd *f_lst);
 char				**create_2d_array_from_env_list(t_env *env);
 void				execution(t_cmd *final_list, t_env **envr, t_list **lst);
 void				simple_cmd(t_cmd *f_lst, t_env *env, char *cmd, char **arr);
-void				ft_builtins(t_env *env, t_cmd *f_lst);
 #endif
