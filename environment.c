@@ -7,7 +7,7 @@ void	print_env(int i, int count, t_env *env)
 		while (env)
 		{
 			if (env->value)
-				ft_printf("%s=%s\n", 1, env->key, env->value);
+				_printf("%s=%s\n", 1, env->key, env->value);
 			env = env->link;
 		}
 	}	
@@ -21,25 +21,25 @@ void	env_parsing(char **cmd, t_env *env)
 	v.count = 0;
 	while (cmd[++v.i])
 	{
-		if (ft_strcmp(cmd[v.i], "env") == 0)
+		if (_strcmp(cmd[v.i], "env") == 0)
 			v.count++;
-		else if (v.count && cmd[v.i][0] == '-' && ft_strlen(cmd[v.i]) > 1)
+		else if (v.count && cmd[v.i][0] == '-' && _strlen(cmd[v.i]) > 1)
 		{
 			g_exit_status = 1;
-			ft_printf("env: illegal option -- %c\n", 2, cmd[v.i][1]);
+			_printf("env: illegal option -- %c\n", 2, cmd[v.i][1]);
 			return ;
 		}
 		else if (v.count && cmd[v.i][0] != '-')
 		{
 			g_exit_status = 127;
-			ft_printf("env: %s: No such file or directory\n", 2, cmd[v.i]);
+			_printf("env: %s: No such file or directory\n", 2, cmd[v.i]);
 			return ;
 		}
 	}
 	print_env(v.i, v.count, env);
 }
 
-t_env	*ft_split_environment(char **env)
+t_env	*_split_environment(char **env)
 {
 	int		i;
 	int		start;
@@ -51,11 +51,11 @@ t_env	*ft_split_environment(char **env)
 	while (env[++i])
 	{
 		start = 0;
-		length = ft_strlen(env[i]);
+		length = _strlen(env[i]);
 		while (env[i][start] != '=')
 			start++;
-		ft_lstadd_back_env(&envr, ft_lstnew_env(ft_substr(env[i], 0, start),
-				ft_substr(env[i], start + 1, length)));
+		_lstadd_back_env(&envr, _lstnew_env(_substr(env[i], 0, start),
+				_substr(env[i], start + 1, length)));
 	}
 	return (envr);
 }

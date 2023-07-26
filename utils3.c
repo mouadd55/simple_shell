@@ -2,12 +2,12 @@
 
 
 /**
- * ft_count_words - Count the number of words in a string, delimited by specific characters.
+ * _count_words - Count the number of words in a string, delimited by specific characters.
  * @s: The input string.
  * @c: The set of characters that delimit the words.
  * Return: The number of words in the string.
  */
-int	ft_count_words(char const *s, char *c)
+int	_count_words(char const *s, char *c)
 {
 	int	i;
 	int	count;
@@ -27,12 +27,12 @@ int	ft_count_words(char const *s, char *c)
 }
 
 /**
- * ft_lenword - Calculate the length of a word in a string, delimited by specific characters.
+ * _lenword - Calculate the length of a word in a string, delimited by specific characters.
  * @s: The input string.
  * @c: The set of characters that delimit the words.
  * Return: The length of the word.
  */
-static int	ft_lenword(char const *s, char *c)
+static int	_lenword(char const *s, char *c)
 {
 	int	i;
 
@@ -43,11 +43,11 @@ static int	ft_lenword(char const *s, char *c)
 }
 
 /**
- * ft_free_arr - Free a dynamically allocated array of strings and its contents.
+ * _free_arr - Free a dynamically allocated array of strings and its contents.
  * @str: The array of strings to be freed.
  * Return: Always returns NULL (0).
  */
-char	**ft_free_arr(char **str)
+char	**_free_arr(char **str)
 {
 	int	i;
 
@@ -62,13 +62,13 @@ char	**ft_free_arr(char **str)
 }
 
 /**
- * ft_split - Split a string into an array of substrings, using specified delimiters.
+ * _split - Split a string into an array of substrings, using specified delimiters.
  * @s: The input string to be split.
  * @c: The set of characters that delimit the substrings.
  * Return: A newly allocated array of strings containing the substrings,
  *         or NULL on failure.
  */
-char	**ft_split(char const *s, char *c)
+char	**_split(char const *s, char *c)
 {
 	int		i;
 	char	**str;
@@ -76,7 +76,7 @@ char	**ft_split(char const *s, char *c)
 	i = 0;
 	if (!s)
 		return (NULL);
-	str = malloc((ft_count_words(s, c) + 1) * sizeof(char *));
+	str = malloc((_count_words(s, c) + 1) * sizeof(char *));
 	if (!str)
 		return (NULL);
 	while (*s)
@@ -85,9 +85,9 @@ char	**ft_split(char const *s, char *c)
 			s++;
 		if (*s)
 		{
-			str[i] = ft_substr(s, 0, ft_lenword(s, c));
+			str[i] = _substr(s, 0, _lenword(s, c));
 			if (!str[i])
-				return (ft_free_arr(str));
+				return (_free_arr(str));
 			i++;
 		}
 		while (!check_char(c, *s) && *s)

@@ -1,9 +1,6 @@
 #ifndef SIMPLESHELL_H
 # define SIMPLESHELL_H
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 5
-#endif
 
 # include <limits.h>
 # include <string.h>
@@ -68,71 +65,72 @@ typedef struct s_vars
 /********************************* Libft utils ********************************/
 
 int					is_space(int c);
-int					ft_isalpha(int ch);
+int					_isalpha(int ch);
 char				is_special(char c);
-char				*ft_itoa(long long n);
+int					is_alpha_num(char c);
 char				is_quote(char input);
-long long			ft_atoi(const char *str);
-char				**ft_free_arr(char **str);
-int					ft_isdigit(char *str);
-size_t				ft_strlen(const char *str);
-char				*ft_strdup(const char *s1);
-void				ft_putchar(char ch, int fd);
-int					ft_strrchr(char *str, int c);
+char				*_itoa(long long n);
+int					_isdigit(char *str);
+long long			_atoi(const char *str);
+char				**_free_arr(char **str);
+size_t				_strlen(const char *str);
+char				*_strdup(const char *s1);
+void				_putchar(char ch, int fd);
+int					_strrchr(char *str, int c);
 int					check_char(char *input, int c);
-int					ft_strchr(char *str, int find);
-char				*ft_strjoin(char *s1, char *s2);
+int					_strchr(char *str, int find);
+char				*_strjoin(char *s1, char *s2);
 char				*f_strchr(const char *s, int c);
 char				*f_strrchr(const char *s, int c);
-char				*ft_strtrim(char *s1, char *set);
-char				*ft_strtrim(char *s1, char *set);
-char				**ft_split(char const *s, char *c);
-int					ft_strcmp(const char *s1, const char *s2);
-char				*ft_substr(char const *s, unsigned int start, size_t len);
-int					is_alpha_num(char c);
+char				*_strtrim(char *s1, char *set);
+char				*_strtrim(char *s1, char *set);
+char				**_split(char const *s, char *c);
+int					_strcmp(const char *s1, const char *s2);
+char				*_substr(char const *s, unsigned int start, size_t len);
 /********************************* List utils *********************************/
 
-int					ft_lstsize(t_list *lst);
-t_list				*ft_lstnew(char *content);
-t_list				*ft_lstlast(t_list *head);
-int					ft_lstsize_env(t_env *env);
-t_env				*ft_lstlast_env(t_env *head);
-void				*ft_destroy_list(t_list **head);
-void				*ft_destroy_list_env(t_env **head);
-t_env				*ft_lstnew_env(char *key, char *value);
-void				ft_lstadd_back(t_list **head, t_list *new);
-void				ft_lstadd_back_env(t_env **head, t_env *new);
+int					_lstsize(t_list *lst);
+t_list				*_lstnew(char *content);
+t_list				*_lstlast(t_list *head);
+int					_lstsize_env(t_env *env);
+t_cmd				*lstlast_final(t_cmd *head);
+t_env				*_lstlast_env(t_env *head);
+t_cmd				*lstnew_final(char **command);
+void				*_destroy_list(t_list **head);
+void				*_destroy_final(t_cmd **head);
+void				*_destroy_list_env(t_env **head);
+t_env				*_lstnew_env(char *key, char *value);
+void				_lstadd_back(t_list **head, t_list *new);
+void				_lstadd_back_env(t_env **head, t_env *new);
 
 /***************************** Parsing functions ******************************/
 
 void				lexer(t_list **list);
 int					check_syntax(t_list *lst);
-t_list				*ft_split_input(char *input);
+t_list				*_split_input(char *input);
 void				syntax_error(char *s2, char e);
-size_t				ft_count_char(char *input, char c);
+size_t				_count_char(char *input, char c);
 void				split_string(t_vars *v, t_cmd *flst, t_env **env, int size);
 
 /**************************** Builtins functions *****************************/
 
-char				*ft_getenv(t_env *env, char *key);
 void				catching_signals(int sig);
-t_cmd				*lstlast_final(t_cmd *head);
-void				*ft_destroy_final(t_cmd **head);
+int					search_for_pipe(t_vars *v);
 void				switch_space(char *input, int x);
-t_env				*ft_split_environment(char **env);
+char				*_getenv(t_env *env, char *key);
+t_env				*_split_environment(char **env);
 void				ft_exit(char **cmd, t_cmd *final);
+void				env_parsing(char **cmd, t_env *env);
 void				spaces_in_quotes(t_cmd **final_list);
 void				change_dir_2(t_env **envr, t_vars *v);
+void				check_cmd(t_env **envr, t_cmd *f_list);
 void				change_dir(t_env **envr, t_cmd *f_list);
-int					ft_printf(const char *first, int fd, ...);
+int					_printf(const char *first, int fd, ...);
 char				*spaces_in_quotes_utils(char *str, int idx);
 void				lstadd_back_final(t_cmd **head, t_cmd *new);
-void				env_parsing(char **cmd, t_env *env);
+void				_setenv(t_env **envr, char *key, char *value);
 void				create_final_list(t_list *list, t_cmd **final_list);
-t_cmd				*lstnew_final(char **command);
-void				check_cmd(t_env **envr, t_cmd *f_list);
-int					search_for_pipe(t_vars *v);
-void				ft_setenv(t_env **envr, char *key, char *value);
+
 /**************************** Execution Part *****************************/
 
 int					lstsize_cmd(t_cmd *lst);
@@ -140,7 +138,7 @@ char				*get_path_value(t_env *env);
 char				*get_paths(char *cmd, t_env *env);
 char				*get_paths(char *cmd, t_env *env);
 int					check_if_builtin(t_cmd *final_list);
-void				ft_builtins(t_env *env, t_cmd *f_lst);
+void				_builtins(t_env *env, t_cmd *f_lst);
 char				**create_2d_array_from_env_list(t_env *env);
 void				execution(t_cmd *final_list, t_env **envr, t_list **lst);
 void				simple_cmd(t_cmd *f_lst, t_env *env, char *cmd, char **arr);

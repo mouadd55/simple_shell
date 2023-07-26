@@ -1,11 +1,11 @@
 #include "simpleshell.h"
 
 /**
- * ft_strlen - Calculate the length of a null-terminated string.
+ * _strlen - Calculate the length of a null-terminated string.
  * @str: A pointer to the null-terminated string.
  * Return: The length of the string (excluding the null terminator).
  */
-size_t	ft_strlen(const char *str)
+size_t	_strlen(const char *str)
 {
 	int	i;
 
@@ -19,21 +19,21 @@ size_t	ft_strlen(const char *str)
 }
 
 /**
- * ft_putchar - Write a character to a file descriptor.
+ * _putchar - Write a character to a file descriptor.
  * @ch: The character to be written.
  * @fd: The file descriptor where the character will be written.
  */
-void	ft_putchar(char ch, int fd)
+void	_putchar(char ch, int fd)
 {
 	write (fd, &ch, 1);
 }
 
 /**
- * ft_strdup - Duplicate a null-terminated string.
+ * _strdup - Duplicate a null-terminated string.
  * @s1: The source string to be duplicated.
  * Return: A pointer to the new duplicated string, or NULL on failure.
  */
-char	*ft_strdup(const char *s1)
+char	*_strdup(const char *s1)
 {
 	char	*dst;
 	int		len;
@@ -42,7 +42,7 @@ char	*ft_strdup(const char *s1)
 	i = 0;
 	if (!s1)
 		return (0);
-	len = ft_strlen(s1);
+	len = _strlen(s1);
 	dst = malloc(sizeof(char) * len + 1);
 	if (!dst)
 		return (NULL);
@@ -57,12 +57,12 @@ char	*ft_strdup(const char *s1)
 }
 
 /**
- * ft_strjoin - Concatenate two null-terminated strings.
+ * _strjoin - Concatenate two null-terminated strings.
  * @s1: The first string.
  * @s2: The second string.
  * Return: A newly allocated pointer to the concatenated string, or NULL on failure.
  */
-char	*ft_strjoin(char *s1, char *s2)
+char	*_strjoin(char *s1, char *s2)
 {
 	char	*str;
 	int		i;
@@ -71,10 +71,10 @@ char	*ft_strjoin(char *s1, char *s2)
 	i = 0;
 	j = 0;
 	if (!s1)
-		s1 = ft_strdup("");
+		s1 = _strdup("");
 	if (!s2)
 		return (NULL);
-	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	str = malloc((_strlen(s1) + _strlen(s2) + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	while (s1[i])

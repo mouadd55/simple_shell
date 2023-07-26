@@ -7,12 +7,12 @@
  */
 void	syntax_error(char *s2, char e)
 {
-	ft_printf("Shell: : syntax error near unexpected token ", 2);
+	_printf("Shell: : syntax error near unexpected token ", 2);
 	if (s2)
-		ft_printf("%s", 2, s2);
+		_printf("%s", 2, s2);
 	if (e)
-		ft_putchar(e, 2);
-	ft_putchar('\n', 2);
+		_putchar(e, 2);
+	_putchar('\n', 2);
 	return ;
 }
 
@@ -25,7 +25,7 @@ int	search_for_pipe(t_vars *v)
 {
 	while (v->tmp1)
 	{
-		if (!ft_strcmp(v->tmp1->type, "PIPE"))
+		if (!_strcmp(v->tmp1->type, "PIPE"))
 			return (1);
 		v->tmp1 = v->tmp1->link;
 	}
@@ -33,11 +33,11 @@ int	search_for_pipe(t_vars *v)
 }
 
 /**
- * ft_isdigit - Check if a string represents a valid integer.
+ * _isdigit - Check if a string represents a valid integer.
  * @str: The input string to be checked.
  * Return: 1 if the string represents a valid integer, 0 otherwise.
  */
-int	ft_isdigit(char *str)
+int	_isdigit(char *str)
 {
 	int	i;
 

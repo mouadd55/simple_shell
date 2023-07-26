@@ -26,17 +26,17 @@ int	check_if_builtin(t_cmd *final_list)
 	char	**arr;
 
 	i = -1;
-	arr = ft_split("cd env exit", " ");
+	arr = _split("cd env exit", " ");
 	while (arr[++i])
 	{
 		if (final_list->cmd && final_list->cmd[0]
-			&& !ft_strcmp(final_list->cmd[0], arr[i]))
+			&& !_strcmp(final_list->cmd[0], arr[i]))
 		{
-			ft_free_arr(arr);
+			_free_arr(arr);
 			return (1);
 		}
 	}
-	ft_free_arr(arr);
+	_free_arr(arr);
 	return (0);
 }
 
@@ -55,7 +55,7 @@ void	execute_commands(t_vars *v, t_env **env, int size)
 	    v->child = fork();
 	    if (v->child < 0)
 	    {
-	    	ft_free_arr(v->env_arr);
+	    	_free_arr(v->env_arr);
 	    	perror("Shell: : fork");
 	    	return ;
 	    }
@@ -69,7 +69,7 @@ void	execute_commands(t_vars *v, t_env **env, int size)
 	        if (size == 1)
 	        	simple_cmd(v->final_list, *env, v->command, v->env_arr);
         }
-		ft_free_arr(v->env_arr);
+		_free_arr(v->env_arr);
 		v->final_list = v->final_list->link;
 	}
 }
@@ -94,7 +94,7 @@ void	execution(t_cmd *final_list, t_env **env, t_list **lst)
 	signal(SIGINT, SIG_IGN);
 	if (final_list->cmd)
 		execute_commands(&v, env, v.count);
-	ft_destroy_list(lst);
+	_destroy_list(lst);
 	wait_return = 0;
 	while (wait_return != -1)
 		wait_return = wait(NULL);

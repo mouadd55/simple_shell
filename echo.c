@@ -1,27 +1,27 @@
 #include "simpleshell.h"
 
-char	*ft_getenv(t_env *env, char *key)
+char	*_getenv(t_env *env, char *key)
 {
 	while (env)
 	{
-		if (!ft_strcmp(env->key, key))
+		if (!_strcmp(env->key, key))
 			return (env->value);
 		env = env->link;
 	}
 	return (NULL);
 }
 
-void	ft_setenv(t_env **envr, char *key, char *value)
+void	_setenv(t_env **envr, char *key, char *value)
 {
 	t_env	*env;
 
 	env = *envr;
 	while (env)
 	{
-		if (!ft_strcmp(env->key, key))
+		if (!_strcmp(env->key, key))
 		{
 			free(env->value);
-			env->value = ft_strdup(value);
+			env->value = _strdup(value);
 			break ;
 		}
 		env = env->link;
@@ -37,8 +37,8 @@ void	change_dir_2(t_env **envr, t_vars *v)
 		v->command = getcwd(NULL, 0);
 		if (v->command)
 		{
-			ft_setenv(envr, "OLDPWD", ft_strdup(ft_getenv(*envr, "PWD")));
-			ft_setenv(envr, "PWD", v->command);
+			_setenv(envr, "OLDPWD", _strdup(_getenv(*envr, "PWD")));
+			_setenv(envr, "PWD", v->command);
 		}
 	}
 	else
@@ -50,27 +50,27 @@ void	change_dir_2(t_env **envr, t_vars *v)
 
 int	check_cd_env(t_env **envr, t_cmd *f_list, t_vars *v)
 {
-	if (!f_list->cmd[1] || !ft_strcmp(f_list->cmd[1], "~"))
+	if (!f_list->cmd[1] || !_strcmp(f_list->cmd[1], "~"))
 	{
 		chdir(getenv("HOME"));
 		return (1);
 	}
-	else if (!ft_strcmp(f_list->cmd[1], "-"))
+	else if (!_strcmp(f_list->cmd[1], "-"))
 	{
-		if (ft_getenv(*envr, "OLDPWD"))
+		if (_getenv(*envr, "OLDPWD"))
 		{
-			v->tmp_str = ft_strdup(ft_getenv(*envr, "OLDPWD"));
-			ft_printf("%s\n", 1, v->tmp_str);
+			v->tmp_str = _strdup(_getenv(*envr, "OLDPWD"));
+			_printf("%s\n", 1, v->tmp_str);
 		}
 		else
 		{
-			ft_printf("Shell: : cd: OLDPWD not set\n", 2);
+			_printf("Shell: : cd: OLDPWD not set\n", 2);
 			return (1);
 		}
 		return (0);
 	}
 	else
-		v->tmp_str = ft_strdup(f_list->cmd[1]);
+		v->tmp_str = _strdup(f_list->cmd[1]);
 	return (0);
 }
 
@@ -79,9 +79,9 @@ void	change_dir(t_env **envr, t_cmd *f_list)
 	t_vars	v;
 
 	v.tmp_str = NULL;
-	if (!f_list->cmd[1] && !ft_getenv(*envr, "HOME"))
+	if (!f_list->cmd[1] && !_getenv(*envr, "HOME"))
 	{
-		ft_printf("Shell: : cd: HOME not set\n", 2);
+		_printf("Shell: : cd: HOME not set\n", 2);
 		return ;
 	}
 	else if (check_cd_env(envr, f_list, &v))
@@ -94,11 +94,11 @@ void	change_dir(t_env **envr, t_cmd *f_list)
 
 void	check_cmd(t_env **envr, t_cmd *f_list)
 {
-	if (f_list && !ft_strcmp(f_list->cmd[0], "cd"))
+	if (f_list && !_strcmp(f_list->cmd[0], "cd"))
 		change_dir(envr, f_list);
-	if (f_list->cmd && f_list->cmd[0] && !ft_strcmp(f_list->cmd[0], "exit"))
+	if (f_list->cmd && f_list->cmd[0] && !_strcmp(f_list->cmd[0], "exit"))
 		ft_exit(f_list->cmd, f_list);
 	else if (lstsize_cmd(f_list) == 1 && f_list->cmd && f_list->cmd[0]
-		&& !ft_strcmp(f_list->cmd[0], "env"))
+		&& !_strcmp(f_list->cmd[0], "env"))
 		env_parsing(f_list->cmd, *envr);
 }

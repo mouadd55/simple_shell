@@ -13,7 +13,7 @@ char	*f_strrchr(const char *s, int c)
 	char	*str;
 
 	str = (char *)s;
-	len = ft_strlen(str);
+	len = _strlen(str);
 	while (len >= 0)
 	{
 		if (str[len] == (char)c)
@@ -49,13 +49,13 @@ char	*f_strchr(const char *s, int c)
 }
 
 /**
- * ft_strtrim - Remove leading and trailing specified characters from a string.
+ * _strtrim - Remove leading and trailing specified characters from a string.
  * @s1: The original string.
  * @set: The set of characters to be trimmed.
  * Return: A newly allocated string with leading and trailing specified
  *         characters removed, or NULL on failure.
  */
-char	*ft_strtrim(char *s1, char *set)
+char	*_strtrim(char *s1, char *set)
 {
 	int		i;
 	int		j;
@@ -66,7 +66,7 @@ char	*ft_strtrim(char *s1, char *set)
 	i = 0;
 	if (!s1 || !set)
 		return (NULL);
-	end = ft_strlen(s1);
+	end = _strlen(s1);
 	while (f_strchr(set, s1[i]) && s1[i])
 		i++;
 	while (f_strrchr(set, s1[end - 1]) && end > i)
@@ -105,11 +105,11 @@ int	nbr_len(long nbr)
 }
 
 /**
- * ft_itoa - Convert an integer to a string.
+ * _itoa - Convert an integer to a string.
  * @n: The integer to be converted.
  * Return: A newly allocated string representation of the integer, or NULL on failure.
  */
-char	*ft_itoa(long long n)
+char	*_itoa(long long n)
 {
 	int			len;
 	char		*str;

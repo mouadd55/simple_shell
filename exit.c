@@ -2,15 +2,15 @@
 
 int	sign_case2(char **cmd)
 {
-	if (!ft_strcmp(cmd[1], "-0") && cmd[2] == 0)
+	if (!_strcmp(cmd[1], "-0") && cmd[2] == 0)
 	{
-		ft_printf("exit\n", 1);
+		_printf("exit\n", 1);
 		exit(0);
 	}
-	else if (cmd[2] && ft_atoi(cmd[1]) == 0 && ft_atoi(cmd[2]) == 0)
+	else if (cmd[2] && _atoi(cmd[1]) == 0 && _atoi(cmd[2]) == 0)
 	{
 		g_exit_status = 1;
-		ft_printf("exit\nShell: : exit: too many arguments\n", 2);
+		_printf("exit\nShell: : exit: too many arguments\n", 2);
 		return (1);
 	}
 	return (0);
@@ -22,10 +22,10 @@ int	sign_case(t_vars *v, char **cmd)
 		return (1);
 	else if (cmd[v->i][0] == '+')
 	{
-		v->str = ft_itoa(ft_atoi(cmd[v->i]));
-		if (ft_strcmp(cmd[v->i] + 1, v->str))
+		v->str = _itoa(_atoi(cmd[v->i]));
+		if (_strcmp(cmd[v->i] + 1, v->str))
 		{
-			ft_printf("exit\nShell: : exit: %s: numeric argument required\n", 2,
+			_printf("exit\nShell: : exit: %s: numeric argument required\n", 2,
 				cmd[v->i]);
 			free(v->str);
 			g_exit_status = 255;
@@ -33,10 +33,10 @@ int	sign_case(t_vars *v, char **cmd)
 		}
 		if (!cmd[v->i + 1])
 		{
-			ft_printf("exit\n", 1);
+			_printf("exit\n", 1);
 			free(v->str);
-			g_exit_status = ft_atoi(cmd[v->i]);
-			exit(ft_atoi(cmd[v->i]));
+			g_exit_status = _atoi(cmd[v->i]);
+			exit(_atoi(cmd[v->i]));
 		}
 		free(v->str);
 	}
@@ -45,25 +45,25 @@ int	sign_case(t_vars *v, char **cmd)
 
 int	check_if_digit(t_vars *v, char **cmd)
 {
-	if (ft_isdigit(cmd[v->i]))
+	if (_isdigit(cmd[v->i]))
 	{
 		v->flag++;
-		v->str = ft_itoa(ft_atoi(cmd[v->i]));
+		v->str = _itoa(_atoi(cmd[v->i]));
 		if (sign_case(v, cmd))
 		{
 			free(v->str);
 			v->str = NULL;
 			return (1);
 		}
-		else if (ft_strcmp(cmd[v->i], v->str))
+		else if (_strcmp(cmd[v->i], v->str))
 		{
-			ft_printf("exit\nShell: : exit: %s: numeric argument required\n", 2,
+			_printf("exit\nShell: : exit: %s: numeric argument required\n", 2,
 				cmd[v->i]);
 			free(v->str);
 			v->str = NULL;
 			exit(255);
 		}
-		g_exit_status = ft_atoi(cmd[v->i]);
+		g_exit_status = _atoi(cmd[v->i]);
 	}
 	return (0);
 }
@@ -74,7 +74,7 @@ int	exit_errors(t_vars *v, char **cmd)
 		return (1);
 	if (v->flag == 0)
 	{
-		ft_printf("exit\nShell: : exit: %s: numeric argument required\n", 2,
+		_printf("exit\nShell: : exit: %s: numeric argument required\n", 2,
 			cmd[v->i]);
 		if (v->str)
 		{
@@ -87,7 +87,7 @@ int	exit_errors(t_vars *v, char **cmd)
 	{
 		v->j++;
 		g_exit_status = 1;
-		ft_printf("exit\nShell: : exit: too many arguments\n", 2);
+		_printf("exit\nShell: : exit: too many arguments\n", 2);
 	}
 	if (v->str)
 	{
@@ -106,9 +106,9 @@ void	ft_exit(char **cmd, t_cmd *final)
 	v.flag = 0;
 	while (cmd && cmd[++v.i])
 	{
-		if (!ft_strcmp("-9223372036854775808", cmd[v.i]))
+		if (!_strcmp("-9223372036854775808", cmd[v.i]))
 		{
-			ft_printf("exit\n", 1);
+			_printf("exit\n", 1);
 			exit(255);
 		}
 		if (exit_errors(&v, cmd))
@@ -118,10 +118,10 @@ void	ft_exit(char **cmd, t_cmd *final)
 	{
 		if (v.flag == 1)
 		{
-			ft_printf("exit\n", 1);
-			exit(ft_atoi(cmd[1]));
+			_printf("exit\n", 1);
+			exit(_atoi(cmd[1]));
 		}
-		ft_printf("exit\n", 1);
+		_printf("exit\n", 1);
 		exit(255);
 	}
 }

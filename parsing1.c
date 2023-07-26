@@ -21,12 +21,12 @@ int	check_char(char *input, int c)
 }
 
 /**
- * ft_count_char - Count the occurrences of a character in a string.
+ * _count_char - Count the occurrences of a character in a string.
  * @input: The input string to count the occurrences in.
  * @c: The character to count.
  * Return: The number of occurrences of the character in the string.
  */
-size_t	ft_count_char(char *input, char c)
+size_t	_count_char(char *input, char c)
 {
 	size_t	i;
 	size_t	count;
@@ -54,17 +54,17 @@ int	check_syntax2(t_list *lst)
 		return (syntax_error(NULL, '|'), 258);
 	else if (check_char(lst->content, '(') || check_char(lst->content, ')'))
 		return (syntax_error(lst->content, 0), 258);
-	else if (lst->content[0] == '\'' && (lst->content[ft_strlen(lst->content)
+	else if (lst->content[0] == '\'' && (lst->content[_strlen(lst->content)
 				- 1] != '\'' || !lst->content[1]))
 		return (syntax_error(NULL, lst->content[0]), 258);
-	else if (lst->content[0] == '\"' && (lst->content[ft_strlen(lst->content)
+	else if (lst->content[0] == '\"' && (lst->content[_strlen(lst->content)
 				- 1] != '\"' || !lst->content[1]))
 		return (syntax_error(NULL, lst->content[0]), 258);
-	else if ((!ft_strcmp(lst->content, ">>") && lst->link->content[0] == '|')
-		|| (!ft_strcmp(lst->content, ">>") && lst->link->content[0] == 32
+	else if ((!_strcmp(lst->content, ">>") && lst->link->content[0] == '|')
+		|| (!_strcmp(lst->content, ">>") && lst->link->content[0] == 32
 			&& lst->link->link->content[0] == '|'))
 		return (syntax_error(NULL, '|'), 258);
-	else if ((!ft_strcmp(lst->content, ">") && lst->link->content[0] == '|'))
+	else if ((!_strcmp(lst->content, ">") && lst->link->content[0] == '|'))
 		return (syntax_error(NULL, '|'), 258);
 	return (0);
 }
@@ -78,8 +78,8 @@ int	check_syntax(t_list *lst)
 {
 	while (lst)
 	{
-		if ((ft_lstsize(lst) == 1 && check_char("><|", lst->content[0]))
-			|| check_char("><|", ft_lstlast(lst)->content[0]))
+		if ((_lstsize(lst) == 1 && check_char("><|", lst->content[0]))
+			|| check_char("><|", _lstlast(lst)->content[0]))
 			return (syntax_error("`newline'", 0), 258);
 		else if ((check_char("><", lst->content[0])) && check_char("><",
 				lst->link->content[0]))
@@ -99,11 +99,11 @@ int	check_syntax(t_list *lst)
 }
 
 /**
- * ft_atoi - Convert a string to a long long integer.
+ * _atoi - Convert a string to a long long integer.
  * @str: The input string to convert.
  * Return: The converted long long integer.
  */
-long long	ft_atoi(const char *str)
+long long	_atoi(const char *str)
 {
 	long long	i;
 	long long	sign;

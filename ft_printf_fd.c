@@ -33,13 +33,13 @@ int	prints(char *s, int fd)
 }
 
 /**
- * ft_specifier - Handle formatting and printing of specific specifiers.
+ * _specifier - Handle formatting and printing of specific specifiers.
  * @args: The va_list containing the arguments.
  * @specifier: The format specifier character.
  * @fd: The file descriptor where the output will be written.
  * Return: The total number of characters printed for the specifier.
  */
-int	ft_specifier(va_list args, char specifier, int fd)
+int	_specifier(va_list args, char specifier, int fd)
 {
 	int	printed;
 
@@ -54,13 +54,13 @@ int	ft_specifier(va_list args, char specifier, int fd)
 }
 
 /**
- * ft_printf - Custom implementation of printf that writes formatted output to a file descriptor.
+ * _printf - Custom implementation of printf that writes formatted output to a file descriptor.
  * @first: The format string containing the text and format specifiers.
  * @fd: The file descriptor where the output will be written.
  * @...: Variable arguments corresponding to the format specifiers in the format string.
  * Return: The total number of characters printed to the file descriptor, or -1 on error.
  */
-int	ft_printf(const char *first, int fd, ...)
+int	_printf(const char *first, int fd, ...)
 {
 	int		i;
 	int		out;
@@ -73,7 +73,7 @@ int	ft_printf(const char *first, int fd, ...)
 	{
 		if (first[i] == '%')
 		{
-			out += ft_specifier(args, first[i + 1], fd);
+			out += _specifier(args, first[i + 1], fd);
 			i++;
 		}
 		else

@@ -1,11 +1,11 @@
 #include "simpleshell.h"
 
 /**
- * ft_lstnew - Create a new node for the t_list linked list.
+ * _lstnew - Create a new node for the t_list linked list.
  * @command: The command to be stored in the new node.
  * Return: A pointer to the newly created t_list node, or NULL on failure.
  */
-t_list	*ft_lstnew(char *content)
+t_list	*_lstnew(char *content)
 {
 	t_list	*head;
 
@@ -20,11 +20,11 @@ t_list	*ft_lstnew(char *content)
 }
 
 /**
- * ft_lstlast - Find the last node of the t_list linked list.
+ * _lstlast - Find the last node of the t_list linked list.
  * @head: The head of the t_list linked list.
  * Return: A pointer to the last node of the linked list, or NULL if the list is empty.
  */
-t_list	*ft_lstlast(t_list *head)
+t_list	*_lstlast(t_list *head)
 {
 	if (!head)
 		return (NULL);
@@ -38,12 +38,12 @@ t_list	*ft_lstlast(t_list *head)
 }
 
 /**
- * ft_lstadd_back - Add a new node to the end of the t_list linked list.
+ * _lstadd_back - Add a new node to the end of the t_list linked list.
  *
  * @head: A pointer to a pointer to the head of the t_list linked list.
  * @new: The new node to be added.
  */
-void	ft_lstadd_back(t_list **head, t_list *new)
+void	_lstadd_back(t_list **head, t_list *new)
 {
 	t_list	*tmp;
 
@@ -51,17 +51,17 @@ void	ft_lstadd_back(t_list **head, t_list *new)
 		*head = new;
 	else
 	{
-		tmp = ft_lstlast(*head);
+		tmp = _lstlast(*head);
 		tmp->link = new;
 		new->prev = tmp;
 	}
 }
 
 /**
- * ft_destroy_list - Free the memory allocated for the t_cmd linked list and its commands.
+ * _destroy_list - Free the memory allocated for the t_cmd linked list and its commands.
  * @head: A pointer to a pointer to the head of the t_cmd linked list.
  */
-void	*ft_destroy_list(t_list **head)
+void	*_destroy_list(t_list **head)
 {
 	t_list	*tmp;
 
@@ -82,11 +82,11 @@ void	*ft_destroy_list(t_list **head)
 }
 
 /**
- * ft_lstsize - Calculate the number of nodes (commands) in the t_list linked list.
+ * _lstsize - Calculate the number of nodes (commands) in the t_list linked list.
  * @lst: The head of the t_list linked list.
  * Return: The number of nodes (commands) in the linked list.
  */
-int	ft_lstsize(t_list *lst)
+int	_lstsize(t_list *lst)
 {
 	int	counter;
 

@@ -76,10 +76,10 @@ int	lstsize_cmd(t_cmd *lst)
 
 
 /**
- * ft_destroy_final - Free the memory allocated for the t_cmd linked list and its commands.
+ * _destroy_final - Free the memory allocated for the t_cmd linked list and its commands.
  * @head: A pointer to a pointer to the head of the t_cmd linked list.
  */
-void	*ft_destroy_final(t_cmd **head)
+void	*_destroy_final(t_cmd **head)
 {
 	t_cmd	*tmp;
 
@@ -90,7 +90,7 @@ void	*ft_destroy_final(t_cmd **head)
 	{
 		tmp = (*head)->link;
 		if ((*head)->cmd)
-			ft_free_arr((*head)->cmd);
+			_free_arr((*head)->cmd);
 		free(*head);
 		(*head) = tmp;
 	}

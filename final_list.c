@@ -8,7 +8,7 @@ char	*spaces_in_quotes_utils(char *str, int idx)
 	i = 0;
 	if (!str)
 		return (0);
-	updated_str = malloc(sizeof(char) * (ft_strlen(str) + 1));
+	updated_str = malloc(sizeof(char) * (_strlen(str) + 1));
 	if (!updated_str)
 		return (0);
 	while (str[i])
@@ -44,17 +44,17 @@ void	spaces_in_quotes(t_cmd **final_list)
 
 void	create_string_for_each_cmd(t_list *list, t_vars *v)
 {
-	if (list->type[0] == 'S' || !ft_strcmp(list->type, "DOUBLE_Q"))
+	if (list->type[0] == 'S' || !_strcmp(list->type, "DOUBLE_Q"))
 	{
 		v->tmp = spaces_in_quotes_utils(list->content, 1);
-		v->str = ft_strjoin(v->str, v->tmp);
+		v->str = _strjoin(v->str, v->tmp);
 		free(v->tmp);
 		v->tmp = NULL;
 	}
-	if (list->type[0] == 'C' || !ft_strcmp(list->type, "FLAG"))
-		v->str = ft_strjoin(v->str, list->content);
+	if (list->type[0] == 'C' || !_strcmp(list->type, "FLAG"))
+		v->str = _strjoin(v->str, list->content);
 	else if (list->type[0] == 's')
-		v->str = ft_strjoin(v->str, " ");
+		v->str = _strjoin(v->str, " ");
 }
 
 void	create_final_list(t_list *list, t_cmd **final_list)
@@ -65,12 +65,12 @@ void	create_final_list(t_list *list, t_cmd **final_list)
 	v.str = NULL;
 	while (list)
 	{
-		while (list && ft_strcmp(list->type, "PIPE"))
+		while (list && _strcmp(list->type, "PIPE"))
 		{
 			create_string_for_each_cmd(list, &v);
 			list = list->link;
 		}
-		lstadd_back_final(final_list, lstnew_final(ft_split(v.str, " ")));
+		lstadd_back_final(final_list, lstnew_final(_split(v.str, " ")));
 		free(v.str);
 		v.str = NULL;
 		if (list)

@@ -15,9 +15,9 @@ void	recreate_list(t_cmd *final_list, t_env **envr)
 		while (final_list->cmd && final_list->cmd[v.i])
 		{
 			v.tmp = spaces_in_quotes_utils(final_list->cmd[v.i], 1);
-			v.str = ft_strjoin(v.str, v.tmp);
+			v.str = _strjoin(v.str, v.tmp);
 			free(v.tmp);
-			v.str = ft_strjoin(v.str, " ");
+			v.str = _strjoin(v.str, " ");
 			v.i++;
 		}
 		if (v.str)
@@ -50,7 +50,7 @@ void	calling_function(t_env **envr, t_list **lst)
 		else
 			g_exit_status = 1;
 	}
-	ft_destroy_final(&final_list);
+	_destroy_final(&final_list);
 }
 
 void	everything_starts_here(t_env *envr)
@@ -72,9 +72,9 @@ void	everything_starts_here(t_env *envr)
 			input[num_chars_read - 1]  = '\0';
 		if (!input)
 			return ;
-		if (ft_strlen(input))
+		if (_strlen(input))
 		{
-			lst = ft_split_input(input);
+			lst = _split_input(input);
 			if (lst)
 				calling_function(&envr, &lst);
 		}
@@ -90,7 +90,7 @@ int	main(int ac, char **av, char **env)
 	if (ac != 1)
 		return (0);
 	envr = NULL;
-	envr = ft_split_environment(env);
+	envr = _split_environment(env);
 	signal(SIGQUIT, SIG_IGN);
 	everything_starts_here(envr);
 	printf("exit\n");
