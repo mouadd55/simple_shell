@@ -79,7 +79,6 @@ size_t				ft_strlen(const char *str);
 char				*ft_strdup(const char *s1);
 void				ft_putchar(char ch, int fd);
 int					ft_strrchr(char *str, int c);
-void				ft_putstr_fd(char *s, int fd);
 int					check_char(char *input, int c);
 int					ft_strchr(char *str, int find);
 char				*ft_strjoin(char *s1, char *s2);
@@ -90,8 +89,6 @@ char				*ft_strtrim(char *s1, char *set);
 char				**ft_split(char const *s, char *c);
 int					ft_strcmp(const char *s1, const char *s2);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
-char				*ft_strnstr(const char *str, const char *to_find,
-						size_t len);
 int					is_alpha_num(char c);
 /********************************* List utils *********************************/
 
@@ -134,7 +131,6 @@ void				env_parsing(char **cmd, t_env *env);
 void				create_final_list(t_list *list, t_cmd **final_list);
 t_cmd				*lstnew_final(char **command);
 void				check_cmd(t_env **envr, t_cmd *f_list);
-void				first_conditions(t_list *tmp);
 int					search_for_pipe(t_vars *v);
 void				ft_setenv(t_env **envr, char *key, char *value);
 /**************************** Execution Part *****************************/

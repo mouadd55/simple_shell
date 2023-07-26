@@ -1,5 +1,10 @@
 #include "simpleshell.h"
 
+/**
+ * syntax_error - Display a syntax error message to the standard error stream.
+ * @s2: A string to be included in the error message.
+ * @e: A character to be appended to the error message.
+ */
 void	syntax_error(char *s2, char e)
 {
 	ft_printf("Shell: : syntax error near unexpected token ", 2);
@@ -11,6 +16,11 @@ void	syntax_error(char *s2, char e)
 	return ;
 }
 
+/**
+ * search_for_pipe - Check if there is a "PIPE" token in the linked list of commands.
+ * @v: A pointer to the t_vars structure containing shell variables.
+ * Return: 1 if a "PIPE" token is found, 0 otherwise.
+ */
 int	search_for_pipe(t_vars *v)
 {
 	while (v->tmp1)
@@ -22,6 +32,11 @@ int	search_for_pipe(t_vars *v)
 	return (0);
 }
 
+/**
+ * ft_isdigit - Check if a string represents a valid integer.
+ * @str: The input string to be checked.
+ * Return: 1 if the string represents a valid integer, 0 otherwise.
+ */
 int	ft_isdigit(char *str)
 {
 	int	i;

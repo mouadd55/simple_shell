@@ -1,5 +1,11 @@
 #include "simpleshell.h"
 
+/**
+ * check_char - Check if a character exists in a given string.
+ * @input: The input string to search for the character.
+ * @c: The character to check for.
+ * Return: 1 if the character is found in the string, 0 otherwise.
+ */
 int	check_char(char *input, int c)
 {
 	int	i;
@@ -14,6 +20,12 @@ int	check_char(char *input, int c)
 	return (0);
 }
 
+/**
+ * ft_count_char - Count the occurrences of a character in a string.
+ * @input: The input string to count the occurrences in.
+ * @c: The character to count.
+ * Return: The number of occurrences of the character in the string.
+ */
 size_t	ft_count_char(char *input, char c)
 {
 	size_t	i;
@@ -29,6 +41,11 @@ size_t	ft_count_char(char *input, char c)
 	return (count);
 }
 
+/**
+ * check_syntax2 - Check for specific syntax errors in the linked list of commands.
+ * @lst: A pointer to the head of the linked list of commands.
+ * Return: 258 if a syntax error is found, 0 otherwise.
+ */
 int	check_syntax2(t_list *lst)
 {
 	if ((lst->content[0] == '|' && lst->link->content[0] == '|')
@@ -52,6 +69,11 @@ int	check_syntax2(t_list *lst)
 	return (0);
 }
 
+/**
+ * check_syntax - Check for general syntax errors in the linked list of commands.
+ * @lst: A pointer to the head of the linked list of commands.
+ * Return: 258 if a syntax error is found, 0 otherwise.
+ */
 int	check_syntax(t_list *lst)
 {
 	while (lst)
@@ -76,6 +98,11 @@ int	check_syntax(t_list *lst)
 	return (0);
 }
 
+/**
+ * ft_atoi - Convert a string to a long long integer.
+ * @str: The input string to convert.
+ * Return: The converted long long integer.
+ */
 long long	ft_atoi(const char *str)
 {
 	long long	i;
