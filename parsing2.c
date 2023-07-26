@@ -13,11 +13,11 @@ void	syntax_error(char *s2, char e)
 	if (e)
 		_putchar(e, 2);
 	_putchar('\n', 2);
-	return ;
 }
 
 /**
- * search_for_pipe - Check if there is a "PIPE" token in the linked list of commands.
+ * search_for_pipe - Check if there is a PIPE
+ * token in the linked list of commands.
  * @v: A pointer to the t_vars structure containing shell variables.
  * Return: 1 if a "PIPE" token is found, 0 otherwise.
  */

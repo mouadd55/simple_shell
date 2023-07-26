@@ -42,7 +42,8 @@ size_t	_count_char(char *input, char c)
 }
 
 /**
- * check_syntax2 - Check for specific syntax errors in the linked list of commands.
+ * check_syntax2 - Check for specific syntax errors
+ * in the linked list of commands.
  * @lst: A pointer to the head of the linked list of commands.
  * Return: 258 if a syntax error is found, 0 otherwise.
  */
@@ -70,7 +71,8 @@ int	check_syntax2(t_list *lst)
 }
 
 /**
- * check_syntax - Check for general syntax errors in the linked list of commands.
+ * check_syntax - Check for general syntax errors
+ * in the linked list of commands.
  * @lst: A pointer to the head of the linked list of commands.
  * Return: 258 if a syntax error is found, 0 otherwise.
  */

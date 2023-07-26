@@ -21,7 +21,8 @@ t_cmd	*lstnew_final(char **command)
 /**
  * lstlast_final - Find the last node of the t_cmd linked list.
  * @head: The head of the t_cmd linked list.
- * Return: A pointer to the last node of the linked list, or NULL if the list is empty.
+ * Return: A pointer to the last node of the linked list, or
+ * NULL if the list is empty.
  */
 t_cmd	*lstlast_final(t_cmd *head)
 {
@@ -57,7 +58,8 @@ void	lstadd_back_final(t_cmd **head, t_cmd *new)
 }
 
 /**
- * lstsize_cmd - Calculate the number of nodes (commands) in the t_cmd linked list.
+ * lstsize_cmd - Calculate the number of nodes
+ * (commands) in the t_cmd linked list.
  * @lst: The head of the t_cmd linked list.
  * Return: The number of nodes (commands) in the linked list.
  */
@@ -76,8 +78,10 @@ int	lstsize_cmd(t_cmd *lst)
 
 
 /**
- * _destroy_final - Free the memory allocated for the t_cmd linked list and its commands.
+ * _destroy_final - Free the memory allocated for
+ * the t_cmd linked list and its commands.
  * @head: A pointer to a pointer to the head of the t_cmd linked list.
+ * Return: nothing
  */
 void	*_destroy_final(t_cmd **head)
 {

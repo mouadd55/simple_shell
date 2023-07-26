@@ -2,7 +2,8 @@
 
 /**
  * _lstnew_env - Create a new node for the t_env linked list.
- * @command: The command to be stored in the new node.
+ * @key: The data to be stored in the new node.
+ * @value: The data to be stored in the new node.
  * Return: A pointer to the newly created t_env node, or NULL on failure.
  */
 t_env	*_lstnew_env(char *key, char *value)
@@ -22,7 +23,8 @@ t_env	*_lstnew_env(char *key, char *value)
 /**
  * _lstlast_env - Find the last node of the t_env linked list.
  * @head: The head of the t_env linked list.
- * Return: A pointer to the last node of the linked list, or NULL if the list is empty.
+ * Return: A pointer to the last node of the
+ * linked list, or NULL if the list is empty.
  */
 t_env	*_lstlast_env(t_env *head)
 {
@@ -58,8 +60,9 @@ void	_lstadd_back_env(t_env **head, t_env *new)
 }
 
 /**
- * _lstsize_env - Calculate the number of nodes (commands) in the t_env linked list.
- * @lst: The head of the t_env linked list.
+ * _lstsize_env - Calculate the number of nodes
+ * (commands) in the t_env linked list.
+ * @env: The head of the t_env linked list.
  * Return: The number of nodes (commands) in the linked list.
  */
 int	_lstsize_env(t_env *env)
@@ -76,8 +79,10 @@ int	_lstsize_env(t_env *env)
 }
 
 /**
- * _destroy_list_env - Free the memory allocated for the t_cmd linked list and its commands.
+ * _destroy_list_env - Free the memory allocated for the t_cmd
+ * linked list and its commands.
  * @head: A pointer to a pointer to the head of the t_cmd linked list.
+ * Return: nothing
  */
 void	*_destroy_list_env(t_env **head)
 {

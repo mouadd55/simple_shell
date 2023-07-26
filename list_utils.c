@@ -2,7 +2,7 @@
 
 /**
  * _lstnew - Create a new node for the t_list linked list.
- * @command: The command to be stored in the new node.
+ * @content: The data to be stored in the new node.
  * Return: A pointer to the newly created t_list node, or NULL on failure.
  */
 t_list	*_lstnew(char *content)
@@ -22,7 +22,8 @@ t_list	*_lstnew(char *content)
 /**
  * _lstlast - Find the last node of the t_list linked list.
  * @head: The head of the t_list linked list.
- * Return: A pointer to the last node of the linked list, or NULL if the list is empty.
+ * Return: A pointer to the last node of the linked list, or
+ * NULL if the list is empty.
  */
 t_list	*_lstlast(t_list *head)
 {
@@ -58,8 +59,10 @@ void	_lstadd_back(t_list **head, t_list *new)
 }
 
 /**
- * _destroy_list - Free the memory allocated for the t_cmd linked list and its commands.
- * @head: A pointer to a pointer to the head of the t_cmd linked list.
+ * _destroy_list - Free the memory allocated for the t_list
+ * linked list and its commands.
+ * @head: A pointer to a pointer to the head of the t_list linked list.
+ * Return: nothing
  */
 void	*_destroy_list(t_list **head)
 {
@@ -82,7 +85,8 @@ void	*_destroy_list(t_list **head)
 }
 
 /**
- * _lstsize - Calculate the number of nodes (commands) in the t_list linked list.
+ * _lstsize - Calculate the number of nodes (commands)
+ * in the t_list linked list.
  * @lst: The head of the t_list linked list.
  * Return: The number of nodes (commands) in the linked list.
  */
