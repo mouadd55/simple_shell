@@ -29,22 +29,6 @@ void	index_list(t_list **list)
 	}
 }
 
-char	*strlower(char *str)
-{
-	int		i;
-	char	*tmp;
-
-	i = 0;
-	tmp = ft_strdup(str);
-	while (tmp[i])
-	{
-		if (tmp[i] >= 'A' && tmp[i] <= 'Z')
-			tmp[i] += 32;
-		i++;
-	}
-	return (tmp);
-}
-
 void	split_string(t_vars *v, t_cmd *final_list, t_env **envr, int size)
 {
 	v->tmp1 = ft_split_input(v->str);

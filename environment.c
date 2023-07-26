@@ -1,19 +1,19 @@
 #include "simpleshell.h"
 
-void	print_env(int i, int count, t_env *env, int fd_out)
+void	print_env(int i, int count, t_env *env)
 {
 	if (i && i == count)
 	{
 		while (env)
 		{
 			if (env->value)
-				ft_printf("%s=%s\n", fd_out, env->key, env->value);
+				ft_printf("%s=%s\n", 1, env->key, env->value);
 			env = env->link;
 		}
 	}	
 }
 
-void	env_parsing(char **cmd, t_env *env, int fd_out)
+void	env_parsing(char **cmd, t_env *env)
 {
 	t_vars	v;
 
@@ -36,7 +36,7 @@ void	env_parsing(char **cmd, t_env *env, int fd_out)
 			return ;
 		}
 	}
-	print_env(v.i, v.count, env, fd_out);
+	print_env(v.i, v.count, env);
 }
 
 t_env	*ft_split_environment(char **env)

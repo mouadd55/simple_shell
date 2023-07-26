@@ -35,3 +35,13 @@ int	ft_isdigit(char *str)
 			return (0);
 	return (1);
 }
+
+void	initialize_variables(t_vars *v)
+{
+	v->vars = 0;
+	v->flag = 0;
+	v->var = NULL;
+	v->val = NULL;
+	v->temp2 = NULL;
+	v->tmp3 = NULL;
+}

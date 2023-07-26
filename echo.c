@@ -30,28 +30,6 @@ void	ft_setenv(t_env **envr, char *key, char *value)
 	return ;
 }
 
-void	pwd(t_cmd *f_list, t_env *env)
-{
-	char	*pwd;
-	int		i;
-
-	i = 0;
-	pwd = strlower(f_list->cmd[0]);
-	if (!ft_strcmp("pwd", pwd))
-	{
-		free(pwd);
-		pwd = getcwd(NULL, 0);
-		if (!pwd)
-		{
-			pwd = ft_getenv(env, "PWD");
-			i = 1;
-		}
-		ft_printf("%s\n", f_list->fd_out, pwd);
-	}
-	if (!i)
-		free(pwd);
-}
-
 void	change_dir_2(t_env **envr, t_vars *v)
 {
 	if (v->tmp_str && !chdir(v->tmp_str))
@@ -131,6 +109,5 @@ void	check_cmd(t_env **envr, t_cmd *f_list)
 		ft_exit(f_list->cmd, f_list);
 	else if (lstsize_cmd(f_list) == 1 && f_list->cmd && f_list->cmd[0]
 		&& !ft_strcmp(f_list->cmd[0], "env"))
-		env_parsing(f_list->cmd, *envr, f_list->fd_out);
-	pwd(f_list, *envr);
+		env_parsing(f_list->cmd, *envr);
 }

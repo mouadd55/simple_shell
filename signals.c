@@ -6,9 +6,10 @@ void	catching_signals(int sig)
 	{
 		g_exit_status = 1;
 		write(1, "\n", 1);
-        printf("Shell: ");
 	}
 }
+
+
 
 void	exit_by_signal(void)
 {

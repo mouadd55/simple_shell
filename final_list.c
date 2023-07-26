@@ -70,7 +70,7 @@ void	create_final_list(t_list *list, t_cmd **final_list)
 			create_string_for_each_cmd(list, &v);
 			list = list->link;
 		}
-		lstadd_back_final(final_list, lstnew_final(ft_split(v.str, " "), 0, 1));
+		lstadd_back_final(final_list, lstnew_final(ft_split(v.str, " ")));
 		free(v.str);
 		v.str = NULL;
 		if (list)

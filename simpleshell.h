@@ -1,12 +1,18 @@
 #ifndef SIMPLESHELL_H
 # define SIMPLESHELL_H
 
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 5
+#endif
+
+# include <limits.h>
 # include <string.h>
+# include <fcntl.h>
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/ioctl.h>
 # include <unistd.h>
-# include <stdarg.h>
 
 extern int			g_exit_status;
 
@@ -30,9 +36,10 @@ typedef struct s_env
 typedef struct s_cmd
 {
 	int				flag;
-	int				fd_in;
-	int				fd_out;
+	// int				fd_in;
+	// int				fd_out;
 	char			**cmd;
+	// char			*file_name;
 	struct s_cmd	*link;
 	struct s_cmd	*prev;
 }					t_cmd;
@@ -48,6 +55,7 @@ typedef struct s_vars
 	int				start;
 	int				count;
 	int				d_quotes;
+	int				pipefd[2];
 	pid_t			child;
 	char			*tmp;
 	char			*tmp_str;
@@ -94,8 +102,9 @@ char				*ft_strtrim(char *s1, char *set);
 char				**ft_split(char const *s, char *c);
 int					ft_strcmp(const char *s1, const char *s2);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
+char				*ft_strnstr(const char *str, const char *to_find,
+						size_t len);
 int					is_alpha_num(char c);
-
 /********************************* List utils *********************************/
 
 int					ft_lstsize(t_list *lst);
@@ -121,10 +130,11 @@ void				split_string(t_vars *v, t_cmd *flst, t_env **env, int size);
 /**************************** Builtins functions *****************************/
 
 char				*ft_getenv(t_env *env, char *key);
-char				*strlower(char *str);
+char				*is_redir(t_list *list);
 void				catching_signals(int sig);
 t_cmd				*lstlast_final(t_cmd *head);
 t_env				*ft_copy_env_list(t_env *env);
+void				initialize_variables(t_vars *v);
 void				*ft_destroy_final(t_cmd **head);
 void				switch_space(char *input, int x);
 t_env				*ft_split_environment(char **env);
@@ -135,15 +145,14 @@ void				change_dir(t_env **envr, t_cmd *f_list);
 int					ft_printf(const char *first, int fd, ...);
 char				*spaces_in_quotes_utils(char *str, int idx);
 void				lstadd_back_final(t_cmd **head, t_cmd *new);
-void				env_parsing(char **cmd, t_env *env, int fd_out);
+void				env_parsing(char **cmd, t_env *env);
 void				create_final_list(t_list *list, t_cmd **final_list);
-t_cmd				*lstnew_final(char **command, int fd_in, int fd_out);
+t_cmd				*lstnew_final(char **command);
 void				check_cmd(t_env **envr, t_cmd *f_list);
 void				first_conditions(t_list *tmp);
 int					search_for_pipe(t_vars *v);
-char				*strlower(char *str);
+void				sig_hand(int sig);
 void				ft_setenv(t_env **envr, char *key, char *value);
-void				pwd(t_cmd *f_list, t_env *env);
 /**************************** Execution Part *****************************/
 
 void				exit_by_signal(void);

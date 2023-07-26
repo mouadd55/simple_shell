@@ -4,16 +4,8 @@ int	check_if_builtin(t_cmd *final_list)
 {
 	int		i;
 	char	**arr;
-	char	*tmp;
 
 	i = -1;
-	tmp = strlower(final_list->cmd[0]);
-	if (!ft_strcmp(tmp, "pwd"))
-	{
-		free(tmp);
-		return (1);
-	}
-	free(tmp);
 	arr = ft_split("cd env exit", " ");
 	while (arr[++i])
 	{
@@ -28,7 +20,7 @@ int	check_if_builtin(t_cmd *final_list)
 	return (0);
 }
 
-void	execute_commands(t_vars *v, t_env **env, int size)
+int	fork_protection(t_vars *v, t_env **env)
 {
 	v->env_arr = create_2d_array_from_env_list(*env);
 	v->child = fork();
@@ -36,20 +28,39 @@ void	execute_commands(t_vars *v, t_env **env, int size)
 	{
 		ft_free_arr(v->env_arr);
 		perror("Shell: : fork");
+		return (1);
 	}
-    else if (v->child == 0)
-    {
-    	signal(SIGINT, SIG_DFL);
-	    signal(SIGQUIT, SIG_DFL);
-	    if (v->final_list->fd_out == -1 && v->final_list->fd_in == -1)
-	    	exit(g_exit_status);
-	    if (v->final_list->cmd && !v->final_list->cmd[0])
-	    	exit(0);
-	    if (size == 1)
-	    	simple_cmd(v->final_list, *env, v->command, v->env_arr);
-    }
 	v->command = NULL;
-    ft_free_arr(v->env_arr);
+	return (0);
+}
+
+void	execute_commands(t_vars *v, t_env **env, int size)
+{
+	while (v->final_list)
+	{
+		if (fork_protection(v, env))
+			return ;
+		if (v->child == 0)
+		{
+        	signal(SIGINT, SIG_DFL);
+	        signal(SIGQUIT, SIG_DFL);
+	        if (v->final_list->cmd && !v->final_list->cmd[0])
+	        	exit(0);
+	        if (size == 1)
+	        	simple_cmd(v->final_list, *env, v->command, v->env_arr);
+        }
+		ft_free_arr(v->env_arr);
+		while ((v->lst) && ft_strcmp((v->lst)->type, "PIPE"))
+		{
+			(v->lst) = (v->lst)->link;
+			if ((v->lst) && !ft_strcmp((v->lst)->type, "PIPE"))
+			{
+				(v->lst) = (v->lst)->link;
+				break ;
+			}
+		}
+		v->final_list = v->final_list->link;
+	}
 }
 
 void	execution(t_cmd *final_list, t_env **env, t_list **lst)

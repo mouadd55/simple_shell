@@ -1,6 +1,6 @@
 #include "simpleshell.h"
 
-t_cmd	*lstnew_final(char **command, int fd_in, int fd_out)
+t_cmd	*lstnew_final(char **command)
 {
 	t_cmd	*head;
 
@@ -8,8 +8,6 @@ t_cmd	*lstnew_final(char **command, int fd_in, int fd_out)
 	if (!head)
 		return (NULL);
 	head->cmd = command;
-	head->fd_in = fd_in;
-	head->fd_out = fd_out;
 	head->link = NULL;
 	head->prev = NULL;
 	return (head);
@@ -67,10 +65,6 @@ void	*ft_destroy_final(t_cmd **head)
 		tmp = (*head)->link;
 		if ((*head)->cmd)
 			ft_free_arr((*head)->cmd);
-		if ((*head)->fd_in >= 3)
-			close((*head)->fd_in);
-		if ((*head)->fd_out >= 3)
-			close((*head)->fd_out);
 		free(*head);
 		(*head) = tmp;
 	}

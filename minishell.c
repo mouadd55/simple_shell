@@ -40,32 +40,17 @@ void	calling_function(t_env **envr, t_list **lst)
 	final_list = NULL;
 	if (lst)
 	{
+		// expand_var(lst, *envr, 1);
 		create_final_list(*lst, &final_list);
 		if (g_exit_status != -1)
+		{
+			recreate_list(final_list, envr);
 			execution(final_list, envr, lst);
+		}
 		else
 			g_exit_status = 1;
 	}
 	ft_destroy_final(&final_list);
-}
-
-void	shell_level(t_env **env)
-{
-	t_vars	v;
-	int		shlvl;
-
-	v.temp1 = *env;
-	while (v.temp1)
-	{
-		if (!ft_strcmp(v.temp1->key, "SHLVL"))
-		{
-			shlvl = (int)ft_atoi(v.temp1->value);
-			free(v.temp1->value);
-			shlvl++;
-			v.temp1->value = ft_itoa(shlvl);
-		}
-		v.temp1 = v.temp1->link;
-	}
 }
 
 void	everything_starts_here(t_env *envr)
@@ -75,12 +60,11 @@ void	everything_starts_here(t_env *envr)
 	size_t buffer_size = 0;
 	ssize_t num_chars_read = 0;
 
-	lst = NULL;
-	signal(SIGINT, &catching_signals);
+	// signal(SIGINT, &catching_signals);
 	while (1)
 	{
 	    input = NULL;
-        printf("Shell: ");
+        printf("$ ");
 		num_chars_read = getline(&input, &buffer_size, stdin);
 		if (num_chars_read < 0)
 			break;
@@ -107,7 +91,6 @@ int	main(int ac, char **av, char **env)
 		return (0);
 	envr = NULL;
 	envr = ft_split_environment(env);
-	shell_level(&envr);
 	signal(SIGQUIT, SIG_IGN);
 	everything_starts_here(envr);
 	printf("exit\n");
