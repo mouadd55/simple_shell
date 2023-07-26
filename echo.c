@@ -35,16 +35,7 @@ void	change_dir_2(t_env **envr, t_vars *v)
 	if (v->tmp_str && !chdir(v->tmp_str))
 	{
 		v->command = getcwd(NULL, 0);
-		if (!v->command)
-		{
-			ft_setenv(envr, "OLDPWD", ft_strdup(ft_getenv(*envr, "PWD")));
-			v->tmp_value = ft_getenv(*envr, "PWD");
-			ft_setenv(envr, "PWD", ft_strjoin(ft_strdup(v->tmp_value), "/.."));
-			ft_putstr_fd("cd: error retrieving current", 2);
-			ft_putstr_fd(" directory: getcwd: cannot access parent ", 2);
-			ft_putstr_fd("directories: No such file or directory\n", 2);
-		}
-		else
+		if (v->command)
 		{
 			ft_setenv(envr, "OLDPWD", ft_strdup(ft_getenv(*envr, "PWD")));
 			ft_setenv(envr, "PWD", v->command);
@@ -73,7 +64,7 @@ int	check_cd_env(t_env **envr, t_cmd *f_list, t_vars *v)
 		}
 		else
 		{
-			ft_putstr_fd("Shell: : cd: OLDPWD not set\n", 2);
+			ft_printf("Shell: : cd: OLDPWD not set\n", 2);
 			return (1);
 		}
 		return (0);
@@ -90,7 +81,7 @@ void	change_dir(t_env **envr, t_cmd *f_list)
 	v.tmp_str = NULL;
 	if (!f_list->cmd[1] && !ft_getenv(*envr, "HOME"))
 	{
-		ft_putstr_fd("Shell: : cd: HOME not set\n", 2);
+		ft_printf("Shell: : cd: HOME not set\n", 2);
 		return ;
 	}
 	else if (check_cd_env(envr, f_list, &v))

@@ -19,7 +19,6 @@ extern int			g_exit_status;
 typedef struct s_list
 {
 	char			*content;
-	int				pos;
 	char			*type;
 	struct s_list	*link;
 	struct s_list	*prev;

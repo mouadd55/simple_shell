@@ -43,15 +43,6 @@ void	execute_commands(t_vars *v, t_env **env, int size)
 	        	simple_cmd(v->final_list, *env, v->command, v->env_arr);
         }
 		ft_free_arr(v->env_arr);
-		while ((v->lst) && ft_strcmp((v->lst)->type, "PIPE"))
-		{
-			(v->lst) = (v->lst)->link;
-			if ((v->lst) && !ft_strcmp((v->lst)->type, "PIPE"))
-			{
-				(v->lst) = (v->lst)->link;
-				break ;
-			}
-		}
 		v->final_list = v->final_list->link;
 	}
 }

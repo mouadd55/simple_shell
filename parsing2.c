@@ -2,9 +2,9 @@
 
 void	syntax_error(char *s2, char e)
 {
-	ft_putstr_fd("Shell: : syntax error near unexpected token ", 2);
+	ft_printf("Shell: : syntax error near unexpected token ", 2);
 	if (s2)
-		ft_putstr_fd(s2, 2);
+		ft_printf("%s", 2, s2);
 	if (e)
 		ft_putchar(e, 2);
 	ft_putchar('\n', 2);

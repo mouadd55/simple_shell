@@ -1,5 +1,10 @@
 #include "simpleshell.h"
 
+/**
+ * ft_strlen - Calculate the length of a null-terminated string.
+ * @str: A pointer to the null-terminated string.
+ * Return: The length of the string (excluding the null terminator).
+ */
 size_t	ft_strlen(const char *str)
 {
 	int	i;
@@ -13,25 +18,21 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
+/**
+ * ft_putchar - Write a character to a file descriptor.
+ * @ch: The character to be written.
+ * @fd: The file descriptor where the character will be written.
+ */
 void	ft_putchar(char ch, int fd)
 {
 	write (fd, &ch, 1);
 }
 
-void	ft_putstr_fd(char *s, int fd)
-{
-	int	i;
-
-	i = 0;
-	if (!s)
-		return ;
-	while (s[i])
-	{
-		write (fd, &s[i], 1);
-		i++;
-	}
-}
-
+/**
+ * ft_strdup - Duplicate a null-terminated string.
+ * @s1: The source string to be duplicated.
+ * Return: A pointer to the new duplicated string, or NULL on failure.
+ */
 char	*ft_strdup(const char *s1)
 {
 	char	*dst;
@@ -55,6 +56,12 @@ char	*ft_strdup(const char *s1)
 	return (dst);
 }
 
+/**
+ * ft_strjoin - Concatenate two null-terminated strings.
+ * @s1: The first string.
+ * @s2: The second string.
+ * Return: A newly allocated pointer to the concatenated string, or NULL on failure.
+ */
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
