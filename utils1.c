@@ -25,7 +25,7 @@ size_t	_strlen(const char *str)
  */
 void	_putchar(char ch, int fd)
 {
-	write (fd, &ch, 1);
+	write(fd, &ch, 1);
 }
 
 /**
@@ -60,7 +60,8 @@ char	*_strdup(const char *s1)
  * _strjoin - Concatenate two null-terminated strings.
  * @s1: The first string.
  * @s2: The second string.
- * Return: A newly allocated pointer to the concatenated string, or NULL on failure.
+ * Return: A newly allocated pointer to the concatenated
+ *string, or NULL on failure.
  */
 char	*_strjoin(char *s1, char *s2)
 {

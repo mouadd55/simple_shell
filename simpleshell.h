@@ -2,6 +2,7 @@
 # define SIMPLESHELL_H
 
 
+# include <sys/wait.h>
 # include <limits.h>
 # include <string.h>
 # include <fcntl.h>
