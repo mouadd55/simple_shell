@@ -40,7 +40,6 @@ void	calling_function(t_env **envr, t_list **lst)
 	final_list = NULL;
 	if (lst)
 	{
-		// expand_var(lst, *envr, 1);
 		create_final_list(*lst, &final_list);
 		if (g_exit_status != -1)
 		{
@@ -60,7 +59,7 @@ void	everything_starts_here(t_env *envr)
 	size_t buffer_size = 0;
 	ssize_t num_chars_read = 0;
 
-	// signal(SIGINT, &catching_signals);
+	signal(SIGINT, &catching_signals);
 	while (1)
 	{
 	    input = NULL;

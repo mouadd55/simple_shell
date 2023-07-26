@@ -109,11 +109,11 @@ int	nbr_len(long nbr)
  * @n: The integer to be converted.
  * Return: A newly allocated string representation of the integer, or NULL on failure.
  */
-char	*_itoa(long long n)
+char	*_itoa(long n)
 {
 	int			len;
 	char		*str;
-	long long	nb;
+	long	nb;
 
 	nb = n;
 	len = nbr_len(nb);

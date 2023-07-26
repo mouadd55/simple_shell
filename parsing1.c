@@ -99,15 +99,15 @@ int	check_syntax(t_list *lst)
 }
 
 /**
- * _atoi - Convert a string to a long long integer.
+ * _atoi - Convert a string to a long integer.
  * @str: The input string to convert.
- * Return: The converted long long integer.
+ * Return: The converted long integer.
  */
-long long	_atoi(const char *str)
+long	_atoi(const char *str)
 {
-	long long	i;
-	long long	sign;
-	long long	res;
+	long	i;
+	long	sign;
+	long	res;
 
 	i = 0;
 	sign = 1;
