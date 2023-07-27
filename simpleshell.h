@@ -76,7 +76,7 @@ typedef struct s_cmd
  * @command: Pointers to temporary strings.
  * @tmp_value: Pointers to temporary strings.
  * @arr: A pointer to a string array.
- * @env_arr: A pointer to a string array representing the environment variables.
+ * @env_arr: A pointer to a string array representing the env variables.
  * @lst: Pointers to t_list nodes for temporary storage and traversal.
  * @tmp1: Pointers to t_list nodes for temporary storage and traversal.
  * @temp1: A pointer to t_env node for temporary storage and traversal.
