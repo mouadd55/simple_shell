@@ -117,7 +117,7 @@ void	simple_cmd(t_cmd *f_list, t_env *env, char *command
 		}
 		if (execve(command, f_list->cmd, env_arr) == -1)
 		{
-			_printf("Shell: %s: command not found\n", 2, f_list->cmd[0]);
+			_printf("Shell: 1: %s: not found\n", 2, f_list->cmd[0]);
 			free(command);
 			_free_arr(env_arr);
 			exit(127);

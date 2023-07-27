@@ -69,10 +69,10 @@ void	everything_starts_here(t_env *envr)
 	ssize_t num_chars_read = 0;
 
 	signal(SIGINT, &catching_signals);
+	_printf("$ ", 1);
 	while (1)
 	{
 		input = NULL;
-		printf("$ ");
 		num_chars_read = getline(&input, &buffer_size, stdin);
 		if (num_chars_read < 0)
 			break;
@@ -108,6 +108,5 @@ int	main(int ac, char **av, char **env)
 	envr = _split_environment(env);
 	signal(SIGQUIT, SIG_IGN);
 	everything_starts_here(envr);
-	printf("exit\n");
 	return (0);
 }

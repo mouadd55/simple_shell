@@ -12,6 +12,13 @@
 # include <sys/ioctl.h>
 # include <unistd.h>
 
+/**
+ * struct s_list - Represents a node in a linked list.
+ * @content: A pointer to the content of the node (usually a string).
+ * @type: A pointer to a string representing the type of the node.
+ * @link: A pointer to the next node in the linked list.
+ * @prev: A pointer to the previous node in the linked list.
+ */
 typedef struct s_list
 {
 	char			*content;
@@ -20,6 +27,13 @@ typedef struct s_list
 	struct s_list	*prev;
 }					t_list;
 
+/**
+ * struct s_env - Represents a node in a linked list of env variables.
+ * @key: A pointer to a string representing the key of an env variable.
+ * @value: A pointer to a string representing the value of the env variable.
+ * @link: A pointer to the next env variable in the linked list.
+ * @prev: A pointer to the previous env variable in the linked list.
+ */
 typedef struct s_env
 {
 	char			*key;
@@ -28,6 +42,13 @@ typedef struct s_env
 	struct s_env	*prev;
 }					t_env;
 
+/**
+ * struct s_cmd - Represents a node in a linked list of commands.
+ * @flag: An integer representing a flag associated with the command.
+ * @cmd: A pointer to a string array containing the command and its arguments.
+ * @link: A pointer to the next command node in the linked list.
+ * @prev: A pointer to the previous command node in the linked list.
+ */
 typedef struct s_cmd
 {
 	int				flag;
@@ -36,6 +57,31 @@ typedef struct s_cmd
 	struct s_cmd	*prev;
 }					t_cmd;
 
+/**
+ * struct s_vars - Represents a set of variables used for shell execution.
+ *
+ * @i: Integer variables for temporary storage and control.
+ * @j: Integer variables for temporary storage and control.
+ * @end: Integer variables for temporary storage and control.
+ * @flag: Integer variables for temporary storage and control.
+ * @start: Integer variables for temporary storage and control.
+ * @count: Integer variables for temporary storage and control.
+ * @d_quotes: Integer variable representing the state of double quotes.
+ * @child: A process ID representing the child process created by the shell.
+ * @tmp: Pointers to temporary strings.
+ * @tmp_str: Pointers to temporary strings.
+ * @str: Pointers to temporary strings.
+ * @val: Pointers to temporary strings.
+ * @tmp_key: Pointers to temporary strings.
+ * @command: Pointers to temporary strings.
+ * @tmp_value: Pointers to temporary strings.
+ * @arr: A pointer to a string array.
+ * @env_arr: A pointer to a string array representing the environment variables.
+ * @lst: Pointers to t_list nodes for temporary storage and traversal.
+ * @tmp1: Pointers to t_list nodes for temporary storage and traversal.
+ * @temp1: A pointer to t_env node for temporary storage and traversal.
+ * @final_list: A pointer to the head of the t_cmd linked list.
+ */
 typedef struct s_vars
 {
 	int				i;
@@ -61,7 +107,7 @@ typedef struct s_vars
 	t_cmd			*final_list;
 }					t_vars;
 
-/********************************* Libft utils ********************************/
+/********************************* Libft utils ******************************/
 
 int					is_space(int c);
 int					_isalpha(int ch);
@@ -86,7 +132,7 @@ char				*_strtrim(char *s1, char *set);
 char				**_split(char const *s, char *c);
 int					_strcmp(const char *s1, const char *s2);
 char				*_substr(char const *s, unsigned int start, size_t len);
-/********************************* List utils *********************************/
+/********************************* List utils *******************************/
 
 int					_lstsize(t_list *lst);
 t_list				*_lstnew(char *content);
@@ -102,7 +148,7 @@ t_env				*_lstnew_env(char *key, char *value);
 void				_lstadd_back(t_list **head, t_list *new);
 void				_lstadd_back_env(t_env **head, t_env *new);
 
-/***************************** Parsing functions ******************************/
+/***************************** Parsing functions ****************************/
 
 void				lexer(t_list **list);
 int					check_syntax(t_list *lst);
@@ -111,7 +157,7 @@ void				syntax_error(char *s2, char e);
 size_t				_count_char(char *input, char c);
 void				split_string(t_vars *v, t_cmd *flst, t_env **env, int size);
 
-/**************************** Builtins functions *****************************/
+/**************************** Builtins functions ****************************/
 
 void				catching_signals(int sig);
 int					search_for_pipe(t_vars *v);
