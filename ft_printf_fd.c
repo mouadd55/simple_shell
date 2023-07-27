@@ -13,11 +13,13 @@ int	printc(char c, int fd)
 	return (1);
 }
 
-/*
- * prints - Write a null-terminated string to a file descriptor.
- * @s: The string to be written.
- * @fd: The file descriptor where the string will be written.
- * Return: The number of characters written on successful write.
+/**
+ * prints - Print a string to a file descriptor.
+ * This function iterates through the characters of the input string 's'
+ * and prints each character one by one using the 'printc' function.
+ * @s: The input string to be printed.
+ * @fd: The file descriptor where the string will be printed.
+ * Return: The number of characters printed.
  */
 int	prints(char *s, int fd)
 {
