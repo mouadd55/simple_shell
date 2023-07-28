@@ -109,7 +109,8 @@ void ft_exit(t_info *vars, char **args)
  * is_builtin_ar_not - Check if the given command is a built-in command or not.
  * @vars: The t_info struct containing information about the shell.
  * @args: A pointer to an array of strings representing the command arguments.
- * Return: 1 if the command is a built-in command and executed successfully, 0 otherwise.
+ * Return: 1 if the command is a built-in command and
+ * 2executed successfully, 0 otherwise.
  */
 int is_builtin_ar_not(t_info *vars, char **args)
 {

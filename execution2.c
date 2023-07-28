@@ -42,9 +42,10 @@ int execute_command(char *cmd, char **args, char *buf, t_info *info)
 }
 
 /**
- * check_if_file_exist - Check if the file exists and has executable permission.
+ * check_if_file_exist - Check if the file exists and has x permission.
  * @file: The name of the file to check.
- * Return: 1 if the file exists and has executable permission, -1 if it doesn't, -2 if an error occurred.
+ * Return: 1 if the file exists and has executable permission,
+ * -1 if it doesn't, -2 if an error occurred.
  */
 int check_if_file_exist(char *file)
 {
@@ -60,7 +61,8 @@ int check_if_file_exist(char *file)
 
 
 /**
- * execution2 - Execute a command using execve and wait for the child process to finish.
+ * execution2 - Execute a command using execve and wait
+ * for the child process to finish.
  * @cmd: The command to execute.
  * @args: An array of strings representing the command arguments.
  * @vars: The t_info struct containing information about the shell.

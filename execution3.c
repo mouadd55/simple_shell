@@ -1,5 +1,11 @@
 #include "simpleshell.h"
 
+/**
+ * where_is_the_cmd - Find the full path of the executable command.
+ * @file: The name of the command to search for.
+ * Return: A pointer to the full path of the executable command if found,
+ * or NULL if the command is not found or doesn't have executable permission.
+ */
 char *where_is_the_cmd(char *file)
 {
 	int size;
