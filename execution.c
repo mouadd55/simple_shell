@@ -1,9 +1,11 @@
 #include "simpleshell.h"
 
 /**
- * find_exact_error - Find and return the exact error message based on the error code.
+ * find_exact_error - Find and return the exact error message
+ * based on the error code.
  * @vars: The t_info struct containing the error code 'nbr_error'.
- * Return: A pointer to the corresponding error message, or an empty string if not found.
+ * Return: A pointer to the corresponding error message, or
+ * an empty string if not found.
  */
 char *find_exact_error(t_info vars)
 {
@@ -15,13 +17,13 @@ char *find_exact_error(t_info vars)
 		{"Illegal number", 133}
 	};
 
-    i = 0;
+	i = 0;
 	while (i < 4)
-    {
+	{
 		if (vars.nbr_error == errors[i].nbr)
 			return (errors[i].error);
-        i++;
-    }
+		i++;
+	}
 	return ("");
 }
 
@@ -34,22 +36,22 @@ char *find_exact_error(t_info vars)
 void more_errors(t_info *vars, char *more)
 {
 	int size_nbr;
-    int size_extra;
-    int length_of_error;
+	int size;
+	int length_of_error;
 	char *error, *nbr;
-    char *str1, *str2;
+	char *str1, *str2;
 
 	nbr = NULL;
 	error = find_exact_error(*vars);
 	nbr = _itoa(vars->count_cmd);
 	size_nbr = _strlen(nbr);
 	length_of_error = _strlen(vars->av[0]);
-	size_extra = _strlen(more);
+	size = _strlen(more);
 	str1 = malloc(length_of_error + size_nbr + 3);
 	str1 = _strcpy(str1, vars->av[0]);
 	str1 = _strjoin(str1, ": ");
 	str1 = _strjoin(str1, nbr);
-	str2 = malloc(_strlen(error) + size_extra + 3);
+	str2 = malloc(_strlen(error) + size + 3);
 	str2 = _strcpy(str2, error);
 	str2 = _strjoin(str2, ": ");
 	str2 = _strjoin(str2, more);
@@ -71,12 +73,12 @@ void print_env(void)
 	int i;
 	char **str;
 
-    i = 0;
-    str = environ;
+	i = 0;
+	str = environ;
 	while (str[i])
 	{
 		_printf("%s\n", 1, str[i]);
-        i++;
+		i++;
 	}
 }
 
@@ -87,7 +89,7 @@ void print_env(void)
  */
 void ft_exit(t_info *vars, char **args)
 {
-    int status;
+	int status;
 	int exit_status;
 
 	status = 1;
@@ -111,15 +113,15 @@ void ft_exit(t_info *vars, char **args)
  */
 int is_builtin_ar_not(t_info *vars, char **args)
 {
-    if (!_strcmp(vars->cmd, "exit"))
-    {
-        ft_exit(vars, args);
-        return (1);
-    }
-    else if (!_strcmp(vars->cmd, "env"))
-    {
-        print_env();
-        return (1);
-    }
+	if (!_strcmp(vars->cmd, "exit"))
+	{
+		ft_exit(vars, args);
+		return (1);
+	}
+	else if (!_strcmp(vars->cmd, "env"))
+	{
+		print_env();
+		return (1);
+	}
 	return (0);
 }
