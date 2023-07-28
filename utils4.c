@@ -118,3 +118,19 @@ char	*_strjoin(char *s1, char *s2)
 	free(s1);
 	return (str);
 }
+
+/**
+ * current_path - Check the order of the path
+ * @path: PATH to check
+ * @vars: General infos
+ **/
+void current_path(char *path, t_info *vars)
+{
+	vars->current_path = 0;
+
+	if (path == NULL)
+		return;
+
+	if (path[0] == ':')
+		vars->current_path = 1;
+}

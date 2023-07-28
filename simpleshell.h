@@ -95,6 +95,7 @@ void execution2(char *cmd, char **args, t_info *vars, char *buf);
 int has_x_permission(char *file_name);
 int exit_args(t_info *vars, char *nbr);
 char	*_strjoin(char *s1, char *s2);
+void current_path(char *path, t_info *vars);
 long	_atoi(const char *str);
 void tokenization(t_info *vars, char **args);
 char *_strcpy(char *dest, char *src);
