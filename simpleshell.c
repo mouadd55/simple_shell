@@ -1,18 +1,29 @@
 #include "simpleshell.h"
 
+/**
+ * catching_signals - Signal handler for SIGINT.
+ * @sig: The signal number.
+ * Return: nothing
+ */
 void catching_signals(int sig)
 {
-    (void)sig;
+	(void)sig;
 	signal(SIGINT, catching_signals);
 	_printf("\n$ ", 1);
 	fflush(stdout);
 }
 
+/**
+ * find_right_path - Find the value of an environment variable.
+ * @name: The name of the environment variable to search for.
+ * Return: The value of the environment variable as a dynamically
+ * allocated string, or NULL if the variable does not exist.
+ */
 char *find_right_path(const char *name)
 {
 	char *str;
-    char *key;
-    char *val;
+	char *key;
+	char *val;
 	char **env;
 	size_t length;
 
@@ -43,6 +54,13 @@ char *find_right_path(const char *name)
 	return (0);
 }
 
+/**
+ * execution - Execute a command with its arguments.
+ * @arguments: The array of command and its arguments.
+ * @vars: Pointer to the 't_info' struct containing shell variables.
+ * @buf: The input buffer containing the command and arguments.
+ * Return: nothing.
+ */
 void execution(char **arguments, t_info *vars, char *buf)
 {
 	char *command;
@@ -81,6 +99,10 @@ void execution(char **arguments, t_info *vars, char *buf)
 	what_error(vars);
 }
 
+/**
+ * everything_starts_here - Main shell loop.
+ * @vars: Pointer to the 't_info' struct containing shell variables.
+ */
 void everything_starts_here(t_info *vars)
 {
 	char *path;
@@ -92,19 +114,19 @@ void everything_starts_here(t_info *vars)
 	{
 		vars->current_path = 0;
 		if (vars->interactive == 0)
-		    return;
-	    _printf("$ ", 1);
+			return;
+		_printf("$ ", 1);
 		path = find_right_path("PATH");
-    	if (path && path[0] == ':')
-    		vars->current_path = 1;
+		if (path && path[0] == ':')
+			vars->current_path = 1;
 		vars->env = path;
 		buff = take_input();
 		if (!buff)
 		{
-            if (vars->interactive)
-			    _printf("exit\n", 1);
-            else
-			    _printf("", 1);
+			if (vars->interactive)
+				_printf("exit\n", 1);
+			else
+				_printf("", 1);
 			free(path);
 			break;
 		}
@@ -121,7 +143,6 @@ void everything_starts_here(t_info *vars)
 		free(path);
 		free(buff);
 	}
-
 }
 
 /**
