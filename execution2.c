@@ -50,7 +50,7 @@ int execute_command(char *cmd, char **args, char *buf, t_info *info)
 int check_if_file_exist(char *file)
 {
 	int i;
-    int size;
+	int size;
 
 	size = _strlen(file);
 	for (i = 0; i < size; i++)

@@ -67,7 +67,8 @@ int exit_args(t_info *vars, char *nbr)
  * @between: The separator to be used between each part.
  * Return: Pointer to the built error message.
  */
-char *build_error_message(char *part1, char *part2, char *part3, const char *between)
+char *build_error_message(char *part1, char *part2, char *part3,
+	const char *between)
 {
 	char *str;
 	int size_str1;
