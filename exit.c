@@ -7,25 +7,37 @@
  */
 int	_isdigit(char c)
 {
-    if (c >= '0' && c <= '9')
-        return (1);
+	if (c >= '0' && c <= '9')
+		return (1);
 	return (0);
 }
 
+/**
+ * check_if_arg_has_an_alpha - Check if a string contains
+ * any alphabetic characters.
+ * @s: The string to be checked.
+ * Return: 1 if the string contains an alphabetic character, 0 otherwise.
+ */
 int check_if_arg_has_an_alpha(char *s)
 {
 	int i;
 
-    i = 0;
+	i = 0;
 	while (s[i])
 	{
 		if (_isdigit(s[i]) == 0)
 			return (1);
-        i++;
+		i++;
 	}
 	return (0);
 }
 
+/**
+ * exit_args - Process and validate the argument provided to the exit command.
+ * @vars: Pointer to the 't_info' struct containing shell variables.
+ * @nbr: The argument string provided to the 'exit' command.
+ * Return: 0 if nbr is not a valid integer or exceeds the range, 1 otherwise.
+ */
 int exit_args(t_info *vars, char *nbr)
 {
 	int digit;
@@ -45,13 +57,23 @@ int exit_args(t_info *vars, char *nbr)
 	return (1);
 }
 
+
+/**
+ * build_error_message - Build an error message from multiple
+ * parts with separators.
+ * @part1: First part of the error message.
+ * @part2: Second part of the error message.
+ * @part3: Third part of the error message.
+ * @between: The separator to be used between each part.
+ * Return: Pointer to the built error message.
+ */
 char *build_error_message(char *part1, char *part2, char *part3, const char *between)
 {
 	char *str;
 	int size_str1;
-    int size_str2;
-    int size_str3;
-    int size_sep;
+	int size_str2;
+	int size_str3;
+	int size_sep;
 
 	size_str1 = size_str2 = size_str3 = size_sep = 0;
 	if (part1)
@@ -82,13 +104,18 @@ char *build_error_message(char *part1, char *part2, char *part3, const char *bet
 	return (str);
 }
 
+/**
+ * what_error - Print an error message based on the command execution.
+ * @vars: Pointer to the 't_info' struct containing shell variables.
+ * Return: nothing.
+ */
 void what_error(t_info *vars)
 {
 	char *str;
 	char *nbr;
 	char *error;
 	int length_of_nbr;
-    int length_of_error;
+	int length_of_error;
 
 	nbr = NULL;
 	error = find_exact_error(*vars);

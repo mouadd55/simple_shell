@@ -9,10 +9,10 @@
 char *where_is_the_cmd(char *file)
 {
 	int size;
-    char *key;
+	char *key;
 	char *str;
 	char *place;
-    char *tmp_value;
+	char *tmp_value;
 
 	place = find_right_path("PATH");
 	if (!place)
