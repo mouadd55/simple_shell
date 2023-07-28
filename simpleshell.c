@@ -73,7 +73,7 @@ void execution(char **arguments, t_info *vars, char *buf)
 	if (is_builtin_ar_not(vars, arguments) == 1)
 		return;
 	flag = check_if_file_exist(command);
-	if (flag == NON_PERMISSIONS)
+	if (flag == -1)
 	{
 		vars->exit_status = 126;
 		vars->nbr_error = 13;
@@ -112,7 +112,7 @@ void everything_starts_here(t_info *vars)
 	signal(SIGINT, catching_signals);
 	while (1)
 	{
-		if (vars->interactive == INTERACTIVE)
+		if (vars->interactive == 1)
 			_printf("$ ", 1);
 		path = find_right_path("PATH");
 		current_path(path, vars);
@@ -120,7 +120,7 @@ void everything_starts_here(t_info *vars)
 		buff = take_input();
 		if (!buff)
 		{
-			if (vars->interactive == INTERACTIVE)
+			if (vars->interactive == 1)
 				_printf("exit\n", 1);
 			else
 				_printf("", 1);
@@ -164,7 +164,7 @@ int main(int ac, char **av)
 	vars->pid = getpid();
 	vars->count_cmd = 0;
 	vars->exit_status = 0;
-	vars->interactive = isatty(STDIN) == INTERACTIVE;
+	vars->interactive = isatty(0) == 1;
 	everything_starts_here(vars);
 	exit_status = vars->exit_status;
 	free(vars);

@@ -27,7 +27,7 @@ char *where_is_the_cmd(char *file)
 		tmp_value = malloc(_strlen(key) + size);
 		tmp_value = _strcpy(tmp_value, key);
 		tmp_value = _strjoin(tmp_value, str);
-		if (has_x_permission(tmp_value) == PERMISSIONS)
+		if (has_x_permission(tmp_value) == 1)
 		{
 			free(place);
 			free(str);
