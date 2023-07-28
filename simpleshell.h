@@ -13,6 +13,19 @@
 # include <sys/wait.h>
 # include <sys/ioctl.h>
 
+#define STDIN            0
+#define STDOUT           1
+#define STDERR           2
+
+#define NON_INTERACTIVE  0
+#define INTERACTIVE      1
+
+#define PERMISSIONS      1
+#define NON_PERMISSIONS -1
+
+#define _FILE            10
+#define NON_FILE         -10
+
 /**
  * struct s_err - Structure to hold an error message and its
  * associated numeric code.

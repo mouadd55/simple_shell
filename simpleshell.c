@@ -73,7 +73,7 @@ void execution(char **arguments, t_info *vars, char *buf)
 	if (is_builtin_ar_not(vars, arguments) == 1)
 		return;
 	flag = check_if_file_exist(command);
-	if (flag == -1)
+	if (flag == NON_PERMISSIONS)
 	{
 		vars->exit_status = 126;
 		vars->nbr_error = 13;
@@ -100,6 +100,22 @@ void execution(char **arguments, t_info *vars, char *buf)
 }
 
 /**
+ * current_path - Check the order of the path
+ * @path: PATH to check
+ * @vars: General infos
+ **/
+void current_path(char *path, t_info *vars)
+{
+	vars->current_path = 0;
+
+	if (path == NULL)
+		return;
+
+	if (path[0] == ':')
+		vars->current_path = 1;
+}
+
+/**
  * everything_starts_here - Main shell loop.
  * @vars: Pointer to the 't_info' struct containing shell variables.
  */
@@ -112,18 +128,15 @@ void everything_starts_here(t_info *vars)
 	signal(SIGINT, catching_signals);
 	while (1)
 	{
-		vars->current_path = 0;
-		if (vars->interactive == 0)
-			return;
-		_printf("$ ", 1);
+		if (vars->interactive == INTERACTIVE)
+			_printf("$ ", 1);
 		path = find_right_path("PATH");
-		if (path && path[0] == ':')
-			vars->current_path = 1;
+		current_path(path, vars);
 		vars->env = path;
 		buff = take_input();
 		if (!buff)
 		{
-			if (vars->interactive)
+			if (vars->interactive == INTERACTIVE)
 				_printf("exit\n", 1);
 			else
 				_printf("", 1);
@@ -167,7 +180,7 @@ int main(int ac, char **av)
 	vars->pid = getpid();
 	vars->count_cmd = 0;
 	vars->exit_status = 0;
-	vars->interactive = isatty(0) == 1;
+	vars->interactive = isatty(STDIN) == INTERACTIVE;
 	everything_starts_here(vars);
 	exit_status = vars->exit_status;
 	free(vars);

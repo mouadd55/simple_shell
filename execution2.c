@@ -13,11 +13,11 @@ int has_x_permission(char *file_name)
 	if (!stat(file_name, &strcutt))
 	{
 		if (strcutt.st_mode & X_OK)
-			return (1);
+			return (PERMISSIONS);
 		else
-			return (-1);
+			return (NON_PERMISSIONS);
 	}
-	return (-2);
+	return (NON_FILE);
 }
 
 /**
@@ -33,12 +33,12 @@ int execute_command(char *cmd, char **args, char *buf, t_info *info)
 
 	if (!info->current_path)
 		return (0);
-	if (has_x_permission(cmd) == 1)
+	if (has_x_permission(cmd) == PERMISSIONS)
 	{
 		execution2(cmd, args, info, buf);
 		return (1);
 	}
-	return (0);
+	return (NON_FILE);
 }
 
 /**
@@ -56,7 +56,7 @@ int check_if_file_exist(char *file)
 	for (i = 0; i < size; i++)
 		if (file[i] == '/')
 			return (has_x_permission(file));
-	return (-2);
+	return (NON_FILE);
 }
 
 
