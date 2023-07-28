@@ -1,5 +1,10 @@
 #include "simpleshell.h"
 
+/**
+ * find_exact_error - Find and return the exact error message based on the error code.
+ * @vars: The t_info struct containing the error code 'nbr_error'.
+ * Return: A pointer to the corresponding error message, or an empty string if not found.
+ */
 char *find_exact_error(t_info vars)
 {
 	int i;
@@ -20,6 +25,12 @@ char *find_exact_error(t_info vars)
 	return ("");
 }
 
+/**
+ * more_errors - Handle additional error messages and print them.
+ * @vars: The t_info struct containing information about the shell.
+ * @more: A string containing additional information about the error.
+ * Return: nothing.
+ */
 void more_errors(t_info *vars, char *more)
 {
 	int size_nbr;
@@ -50,6 +61,11 @@ void more_errors(t_info *vars, char *more)
 	free(str2);
 }
 
+/**
+ * print_env - Print the environment variables to stdout.
+ * This function prints the environment variables, line by line,
+ * to the standard output.
+ */
 void print_env(void)
 {
 	int i;
@@ -64,6 +80,11 @@ void print_env(void)
 	}
 }
 
+/**
+ * ft_exit - Handle the "exit" command and exit the shell.
+ * @vars: The t_info struct containing information about the shell.
+ * @args: A pointer to an array of strings representing the command arguments.
+ */
 void ft_exit(t_info *vars, char **args)
 {
     int status;
@@ -82,6 +103,12 @@ void ft_exit(t_info *vars, char **args)
 	exit(exit_status);
 }
 
+/**
+ * is_builtin_ar_not - Check if the given command is a built-in command or not.
+ * @vars: The t_info struct containing information about the shell.
+ * @args: A pointer to an array of strings representing the command arguments.
+ * Return: 1 if the command is a built-in command and executed successfully, 0 otherwise.
+ */
 int is_builtin_ar_not(t_info *vars, char **args)
 {
     if (!_strcmp(vars->cmd, "exit"))
@@ -96,4 +123,3 @@ int is_builtin_ar_not(t_info *vars, char **args)
     }
 	return (0);
 }
-
