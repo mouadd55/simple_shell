@@ -155,6 +155,7 @@ int main(int ac, char **av)
 {
 	int exit_status;
 	t_info *vars;
+
 	vars = malloc(sizeof(t_info));
 	if (!vars)
 	{

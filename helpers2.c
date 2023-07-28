@@ -20,9 +20,9 @@ char *return_val(char *envi)
  * exit_status_and_pid - Get the value of special tokens $? and $$.
  * @vars: Pointer to the 't_info' struct containing shell variables.
  * @var: The string representing the special token or environment variable.
- * Return: The value of the special token or environment variable as a dynamically
- * allocated string, or NULL if 'var' is not a special token or an
- * existing environment variable.
+ * Return: The value of the special token or environment variable as a
+ * dynamically allocated string, or NULL if 'var' is not a special
+ * token or an existing environment variable.
  */
 char *exit_status_and_pid(t_info *vars, char *var)
 {

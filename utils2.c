@@ -26,13 +26,21 @@ int	_count_words(char const *s, char *c)
 	return (count);
 }
 
+/**
+ * _re_alloc - Reallocate memory for a block of memory.
+ * @addr: Pointer to the memory block to be reallocated.
+ * @before: The current size of the memory block.
+ * @after: The new size to which the memory block should be reallocated.
+ * Return: Pointer to the reallocated memory block, or NULL
+ * if the allocation fails.
+ */
 void *_re_alloc(void *addr, size_t before, size_t after)
 {
 	char *buf;
-    char *str;
+	char *str;
 	unsigned int a;
 
-    a = 0;
+	a = 0;
 	if (after == before)
 		return (addr);
 	if (!addr)
@@ -52,10 +60,10 @@ void *_re_alloc(void *addr, size_t before, size_t after)
 		return (0);
 	str = addr;
 	while (a < before)
-    {
+	{
 		buf[a] = str[a];
-        a++;
-    }
+		a++;
+	}
 	free(addr);
 	return (buf);
 }

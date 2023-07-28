@@ -13,12 +13,35 @@
 # include <sys/wait.h>
 # include <sys/ioctl.h>
 
+/**
+ * struct s_err - Structure to hold an error message and its
+ * associated numeric code.
+ * @error: Pointer to the error message string.
+ * @nbr: The numeric code associated with the error.
+ */
 typedef struct s_err
 {
 	char *error;
 	int nbr;
 } t_err;
 
+/**
+ * struct s_info - Structure to store various pieces of
+ * information used in the shell program.
+ * @ac: Number of command-line arguments.
+ * @interactive: Flag indicating if the shell is in interactive mode.
+ * @nbr_error: Error number or code.
+ * @count_cmd: Count of commands executed in the shell.
+ * @exit_status: Exit status of the last executed command.
+ * @current_path: Flag indicating if the current path is set.
+ * @pid: Process ID of the shell process.
+ * @av: Pointer to an array of command-line argument strings.
+ * @cmd: Pointer to the current command being processed.
+ * @path_value: Pointer to the value of the "PATH" environment variable.
+ * @buf: Pointer to a buffer used for input.
+ * @args: Pointer to an array of strings representing command-line arguments.
+ * @env: Pointer to a string representing an environment variable.
+ */
 typedef struct s_info
 {
 	int ac;
