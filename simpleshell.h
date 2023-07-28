@@ -87,7 +87,7 @@ void tokenization(t_info *vars, char **args);
 char *_strcpy(char *dest, char *src);
 char *exit_status_and_pid(t_info *vars, char *var);
 char *build_error_message(char *part1, char *part2,
-    char *part3, const char *between);
+	char *part3, const char *between);
 char *take_input();
 int check_if_file_exist(char *file);
 char *find_right_path(const char *name);
